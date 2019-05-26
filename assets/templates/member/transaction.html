@@ -1,0 +1,105 @@
+<div class="container-fluid">
+
+	<ol class="breadcrumb">
+		<li><a ui-sref="dashboard">หน้าหลัก</a></li>
+        <li class="active">รายการโพย</li>
+    </ol>
+	
+	<div class="row">
+		<div class="col-md-12">
+
+			<ul class="nav nav-tabs primary-tabs">
+				<li ng-class="{'active': activeTab=='recent'}" ng-click="toggleTab('recent')"><a><i class="fa fa-list-ol"></i> โพยล่าสุด</a></li>
+    			<li ng-class="{'active': activeTab=='history'}" ng-click="toggleTab('history')"><a><i class="fa fa-history"></i> โพยย้อนหลัง</a></li>
+	  		</ul>
+
+	  		<div class="tab-content">				
+				<div class="col-md-12 box-ticket">
+					<div ng-show="activeTab=='history'">
+							<form class="form-inline"  ">
+									<div class="form-group">
+										<label>ประเภทหวย</label>
+										<select class="form-control" ng-model="filters.lotto_type2">
+												<option value="">-เลือกหวย-</option>
+											<option ng-repeat="lotto_type in LottoTypes" value="{{lotto_type.category}}">
+												{{lotto_type.name}}
+											</option>
+										</select>
+									</div>
+								</form>
+								<br />
+
+			  			<form class="form-inline">
+						  	<div class="form-group">
+						    	<label>วันที่</label>
+						    	<input type="text" 
+						      		class="form-control" 
+						      		uib-datepicker-popup="yyyy-MM-dd" 
+						      		ng-model="filters.from" 
+						      		name="from_date" 
+						      		is-open="isFromDatePopup" 
+						      		datepicker-options="FromDateOptions"
+						      		ng-click="toggleFromDatePopup()"
+						      		ng-focus="toggleFromDatePopup()"
+						      		readonly 
+						      	/>
+							  </div>
+							  
+						  	<div class="form-group">
+						    	<label>ถึง</label>
+						    	<input type="text" 
+						      		class="form-control" 
+						      		uib-datepicker-popup="yyyy-MM-dd" 
+						      		ng-model="filters.to" 
+						      		name="to_date" 
+						      		is-open="isToDatePopup" 
+						      		datepicker-options="ToDateOptions"
+						      		ng-click="toggleToDatePopup()"
+						      		ng-focus="toggleToDatePopup()"
+						      		readonly 
+						      	/>
+						  	</div>
+						  	<button type="button" class="btn btn-info" ng-click="showTicket()"><i class="fa fa-search" aria-hidden="true"></i> แสดง</button>
+						</form>
+						<hr>
+					</div>
+
+					<div ng-show="activeTab=='recent'" class="alert alert-warning">
+						<i class="fa fa-info-circle" aria-hidden="true"></i> ข้อมูลย้อนหลัง ล่าสุด วันที่ {{current_date}}<br/>* คลิกที่หัวตารางเพื่อเรียงลำดับข้อมูล
+					</div>
+					
+					<form class="form-inline"  ng-show="activeTab=='recent'">
+						<div class="form-group">
+							<label>ประเภทหวย</label>
+							
+							<select class="form-control" ng-change="lotteryFilter()" ng-model="filters.lotto_type">
+								<option value="">-เลือกหวย-</option>
+								<option ng-repeat="lotto_type in LottoTypes" value="{{lotto_type.category}}">
+									{{lotto_type.name}}
+								</option>
+							</select>
+						</div>
+					</form>
+					<hr/>
+					<h3><u>ยอดรวม ตามประเภท</u></h3>
+					ยอดแทง : <span style="font-size:22px">{{total_credit|number:2}}</span><br/>
+					ส่วนลด : <span style="font-size:20px">{{total_discount_credit|number:2}}</span><br/>
+					
+					ยอดตัวถูก : <span style="font-size:22px">{{total_win_credit|number:2}}</span><br/>
+					<span ng-if="net_total_win_lose_credit >= 0">
+						แพ้/ชนะ : <span style="font-size:22px; color:rgb(0,0,0)">{{net_total_win_lose_credit|number:2}}</span><hr/>
+					</span>
+					<span ng-if="net_total_win_lose_credit < 0">
+						แพ้/ชนะ : <span style="font-size:22px; color:rgb(190,0,0)">{{net_total_win_lose_credit|number:2}}</span><hr/>
+					</span>
+					<table datatable dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" class="table table-hover table-striped table-ticket"></table>
+
+			  	</div>
+
+			   	<div class="clearfix"></div>
+
+			</div>
+		</div>
+	</div>
+
+</div>

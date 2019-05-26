@@ -1,0 +1,39 @@
+<style>
+.table tbody tr td:nth-child(2) {
+    color: blue;
+}
+</style>
+<div class="col-md-12">
+
+	<form class="form-inline">
+		<div class="form-group">
+		    <label>ประเภท</label>
+		    <select class="form-control" ng-change="numberFilter()" ng-model="filter">
+		    	<option value="">ทั้งหมด</option>
+		    	<option value="lao">หวยชุด</option>
+		    	<option value="three_number_top">3 ตัวบน</option>
+		    	<option value="three_number_tode">3 ตัวโต๊ด</option>
+		    	<option value="two_number_top">2 ตัวบน</option>
+		    	<option value="two_number_tode">2 ตัวโต๊ด</option>
+		    	<option value="two_number_bottom">2 ตัวล่าง</option>
+		    	<option value="run_top">วิ่งบน</option>
+		    	<option value="run_bottom">วิ่งล่าง</option>
+		    </select>
+		</div>
+	</form>
+
+	<hr>
+    
+    <table datatable dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" class="table table-hover">
+    	<tfoot>
+    		<tr>
+    			<th colspan="2" class="text-center">รวม</th>
+    			<th>{{ Summary.amount | number }}</th>
+    			<th>{{ Summary.discount | number }}</th>
+    			<th>{{ Summary.credit | number }}</th>
+    		</tr>
+    	</tfoot>
+    </table>
+
+</div>
+<div class="clearfix"></div>

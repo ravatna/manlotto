@@ -1,0 +1,69 @@
+<div class="modal-header">
+    <i class="fa fa-times pull-right" style="cursor: pointer;" ng-click="cancelForm()"></i>
+    <h4 class="modal-title" id="modal-title">{{ModalTitle}}</h4>
+</div>
+<div class="modal-body" id="modal-body">
+    <div class="text-right">
+        <button class="btn btn-sm btn-success" ng-click="toggleForm('deposit')"><i class="fa fa-plus" aria-hidden="true"></i> เพิ่มเครดิต</button>
+        <button class="btn btn-sm btn-danger" ng-click="toggleForm('withdraw')"><i class="fa fa-share-square" aria-hidden="true"></i> ถอนเครดิต</button>
+    </div>
+
+    <div ng-show="selectForm=='deposit'" class="alert alert-success animate-show-hide" role="alert" style="margin-top:20px;">
+        <div ng-show="isSuccess" class="text-center">
+            <h3>เพิ่มเครดิตเสร็จเรียบร้อย</h3>
+            <div>
+                <button ng-click="closeForm()" class="btn btn-sm btn-default">ตกลง</button>
+            </div>
+        </div>
+        <div ng-hide="isSuccess">
+            <h3 style="margin-top:0px;">เพิ่มเครดิต</h3>
+            <form name="depositCreditForm">
+                <div class="form-group">
+                    <label>เครดิตคงเหลือ: {{User.balance}}</label>
+                </div>
+                <div class="form-group" ng-class="{'has-error':invalidDeposit}">
+                    <label>จำนวนเครดิต</label>
+                    <input type="number" class="form-control" placeholder="จำนวนเครดิตที่ต้องการเพิ่ม" ng-model="deposit.amount">
+                </div>
+                <div class="form-group">
+                    <label>รายละเอียดเพิ่มเติม</label>
+                    <textarea class="form-control" placeholder="รายละเอียดเพิ่มเติม" ng-model="deposit.note"></textarea>
+                </div>
+                <button type="button" class="btn btn-default" ng-click="saveDeposit()">Submit</button>
+                <button type="button" class="btn btn-default" ng-click="toggleForm('')">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <div ng-show="selectForm=='withdraw'" class="alert alert-warning animate-show-hide" role="alert" style="margin-top:20px;">
+        <div ng-show="isSuccess" class="text-center">
+            <h3>ถอนเครดิตเสร็จเรียบร้อย</h3>
+            <div>
+                <button ng-click="closeForm()" class="btn btn-sm btn-default">ตกลง</button>
+            </div>
+        </div>
+        <div ng-hide="isSuccess">
+            <h3 style="margin-top:0px;">ถอนเครดิต</h3>
+            <form name="withdrawCreditForm">
+                <div class="form-group">
+                    <label>เครดิตคงเหลือ: {{User.balance}}</label>
+                </div>
+                <div class="form-group" ng-class="{'has-error':invalidWithdraw}">
+                    <label>จำนวนเครดิต</label>
+                    <input type="number" class="form-control" placeholder="จำนวนเครดิตที่ต้องการถอน" ng-model="withdraw.amount">
+                </div>
+                <div class="form-group">
+                    <label>รายละเอียดเพิ่มเติม</label>
+                    <textarea class="form-control" placeholder="รายละเอียดเพิ่มเติม" ng-model="withdraw.note"></textarea>
+                </div>
+                <button type="button" class="btn btn-default" ng-click="saveWithdraw()">Submit</button>
+                <button type="button" class="btn btn-default" ng-click="toggleForm('')">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <table datatable dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" class="table table-hover table-striped"></table>
+    </div>
+
+</div>

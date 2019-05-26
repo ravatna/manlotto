@@ -1,0 +1,69 @@
+<div class="modal-header">
+    <i class="fa fa-times pull-right" style="cursor: pointer;" ng-click="cancelForm()"></i>
+    <h4 class="modal-title" id="modal-title">{{ModalTitle}}</h4>
+</div>
+<div class="modal-body" id="modal-body">
+    <form name="formUser" class="form-horizontal">
+
+        <div ng-show="isSuccess" class="alert alert-success" role="alert"><i class="fa fa-check-square-o" aria-hidden="true"></i> บันทึกข้อมูลเสร็จเรียบร้อยแล้ว</div>
+
+        <div ng-show="user.user_id > 0" class="form-group">
+            <label for="username" class="col-md-3 control-label">Username: </label>
+            <div class="col-md-9">
+                <input type="text" ng-model="user.username" class="form-control" name="username">
+            </div>
+        </div>
+
+        <div ng-show="user.user_id > 0" class="form-group">
+            <label for="password" class="col-md-3 control-label">Password: </label>
+            <div class="col-md-9">
+                <input type="text" ng-model="user.password" class="form-control" name="password" placeholder="เปลี่ยนรหัสผ่าน">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="role" class="col-md-3 control-label">ระดับสมาชิก: </label>
+            <div class="col-md-9">
+                <select class="form-control" ng-model="user.role" name="role">
+                    <option ng-repeat="role in Roles" value="{{role.key}}">{{role.text}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="status" class="col-md-3 control-label">สถานะ: </label>
+            <div class="col-md-9">
+                <select class="form-control" ng-model="user.status" name="status">
+                        <option ng-repeat="status in UserStatus" value="{{status.key}}">{{status.text}}</option>
+                    </select>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="formError.fullname?'has-error':'no-error'">
+            <label for="fullname" class="col-md-3 control-label">ชื่อ: </label>
+            <div class="col-md-9">
+                <input type="text" ng-model="user.fullname" class="form-control" name="fullname" required placeholder="ชื่อลูกค้า">
+                <span ng-show="formError.fullname" class="control-label">{{formErrorText.fullname}}</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="tel" class="col-md-3 control-label">เบอร์โทรศัพท์: </label>
+            <div class="col-md-9">
+                <input type="text" ng-model="user.tel" class="form-control" name="tel" placeholder="เบอร์โทรศัพท์">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="line" class="col-md-3 control-label">Line ID: </label>
+            <div class="col-md-9">
+                <input type="text" ng-model="user.line" class="form-control" name="line" placeholder="Line ID">
+            </div>
+        </div>
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" type="button" ng-click="cancelForm()">ยกเลิก</button>
+    <button class="btn btn-primary" type="button" ng-click="saveUser()">บันทึก</button>
+</div>

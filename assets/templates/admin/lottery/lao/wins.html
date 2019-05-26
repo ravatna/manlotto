@@ -1,0 +1,23 @@
+<style>
+.table-responsive {
+    padding-bottom: 0px;
+}    
+</style>
+
+<div class="col-md-12">
+    
+    <div ng-if="Lottery.db.lottery_status=='process'" class="text-right" style="margin-bottom: 15px;">
+        <button type="button" class="btn btn-success" ng-click="confirmResult()"><i class="fa fa-check" aria-hidden="true"></i> ยืนยันผลรางวัล</button>
+    </div>
+
+    <table datatable dt-options="dtOptions" dt-columns="dtColumns" dt-instance="$parent.dtInstance" class="table table-hover">
+        <tfoot>
+            <tr>
+                <th colspan="6" class="text-center">รวม</th>
+                <th colspan="1">{{ Summary.return | number }}</th>
+            </tr>
+        </tfoot>
+    </table>
+
+</div>
+<div class="clearfix"></div>

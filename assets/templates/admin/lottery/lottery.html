@@ -1,0 +1,19 @@
+<style type="text/css">
+.sub-nav>.active>a {
+    color: #31708f !important;
+    background-color: #d9edf7 !important;
+    border-color: #d9edf7 !important;
+}
+</style>
+
+<ol class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a ui-sref="lottery" ui-sref-opts="{ reload: true }">จัดการหวย</a></li>
+    <li class="active">{{ Group | lotteryGroup }}</li>
+</ol>
+
+<ul class="nav nav-tabs sub-nav">
+    <li ui-sref-active="active"><a ui-sref="lottery.group({group:Group})" style="border-radius: 0px;"><i class="fa fa-list" aria-hidden="true"></i> รายการงวดหวย</a></li>
+    <li ui-sref-active="active"><a ui-sref="lottery.open({group:Group})" style="border-radius: 0px;"><i class="fa fa-plus-circle" aria-hidden="true"></i> เปิดงวดหวย</a></li>
+</ul>
+
+<table datatable dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" class="table table-hover table-striped user-table"></table>

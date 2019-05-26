@@ -1,0 +1,33 @@
+<div class="row" style="margin-top: 20px;">
+	<div class="col-lg-6">
+		<ul class="nav nav-tabs sub-2-nav" style="border-bottom: 0px;">
+			<li ui-sref-active="active">
+				<a ui-sref="user.dashboard.financial.search({user_id: userId})" style="border-radius: 0px;">
+					<i class="fa fa-search" aria-hidden="true"></i> ค้นหา
+				</a>
+			</li>
+			<li ui-sref-active="active">
+				<a ui-sref="user.dashboard.financial.deposit({user_id: userId})" style="border-radius: 0px;">
+					<i class="fa fa-plus" aria-hidden="true"></i> เติมเงิน
+				</a>
+			</li>
+			<li ui-sref-active="active">
+				<a ui-sref="user.dashboard.financial.withdraw({user_id: userId})" style="border-radius: 0px;">
+					<i class="fa fa-share-square" aria-hidden="true"></i> ถอนเงิน
+				</a>
+			</li>
+		</ul>
+		<div class="panel panel-default" style="border-radius: 0px;" ui-view>
+			<div class="panel-body">
+				xxx
+			</div>
+			<div class="panel-footer text-right">
+				<button type="button" class="btn btn-primary" style="display: unset;"><i class="fa fa-search" aria-hidden="true"></i> ค้นหา</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-12">
+		<table datatable dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" class="table table-hover table-striped"></table>
+	</div>
+</div>

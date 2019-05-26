@@ -1,0 +1,38 @@
+
+<div class="rows">
+	<div class="col-md-1"  >
+	</div>
+	<div class="col-md-10"  >
+<ol class="breadcrumb" style="margin-bottom: 0px;">
+	<li><a ui-sref="#"> </a></li>
+    <li class="active">{{ Lottery.type | lotteryGroup }} งวดวันที่ {{ Lottery.lottery_date | lotteryDate }}</li>
+</ol>
+
+
+<div ui-view class="table-responsive" >
+<h2>{{captionTitle}}</h2>
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th style="width:200px;" >ประเภท</th>			
+				<th  style="width:150px;">ยอดแทง</th>				
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="report in Reports">
+				<td class="text-center"><a ng-click="updateNumberType(report.type)" ui-sref="report.detail.by_type_summary.numbers2({type:report.type})">{{ report.type | lotteryOptionName }}</a></td>
+				<td class="text-right" >{{ report.amount*-1 | number:2 }}</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th class="text-center">รวม</th>
+				<th class="text-right" >{{ Summary.amount*-1 | number:2}}</th>
+				</tr>
+		</tfoot>
+	</table>
+</div>
+</div>
+<div class="col-md-1"  >
+	</div>
+</div>

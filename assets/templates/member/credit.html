@@ -1,0 +1,62 @@
+<style>
+.txt-red {
+	color: red;
+}
+.txt-green {
+	color: green;
+}
+</style>
+<div class="container-fluid">
+
+    <ol class="breadcrumb">
+        <li><a ui-sref="dashboard">หน้าหลัก</a></li>
+        <li class="active">รายงานเครดิต</li>
+    </ol>
+
+    <div class="panel panel-default">
+	    <div class="panel-heading">
+	        <i class="fa fa-credit-card-alt" aria-hidden="true"></i> รายงานเครดิต
+	    </div>
+	    <div class="panel-body">
+	    	
+			<form class="form-inline">
+			  	<div class="form-group">
+			    	<label>วันที่</label>
+			    	<input type="text" 
+			      		class="form-control" 
+			      		uib-datepicker-popup="yyyy-MM-dd" 
+			      		ng-model="filters.from" 
+			      		name="from_date" 
+			      		is-open="isFromDatePopup" 
+			      		datepicker-options="FromDateOptions"
+			      		ng-click="toggleFromDatePopup()"
+			      		ng-focus="toggleFromDatePopup()"
+			      		readonly 
+			      	/>
+			  	</div>
+			  	<div class="form-group">
+			    	<label>ถึง</label>
+			    	<input type="text" 
+			      		class="form-control" 
+			      		uib-datepicker-popup="yyyy-MM-dd" 
+			      		ng-model="filters.to" 
+			      		name="to_date" 
+			      		is-open="isToDatePopup" 
+			      		datepicker-options="ToDateOptions"
+			      		ng-click="toggleToDatePopup()"
+			      		ng-focus="toggleToDatePopup()"
+			      		readonly 
+			      	/>
+			  	</div>
+			  	<button type="button" class="btn btn-info" ng-click="showCredit()"><i class="fa fa-search" aria-hidden="true"></i> แสดง</button>
+			</form>
+
+			<hr>
+
+	    	<table datatable dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" class="table table-hover table-striped table-ticket">
+            </table>
+
+	    </div>
+	</div>
+
+</div>

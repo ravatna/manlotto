@@ -1,0 +1,45 @@
+<div class="row" style="margin-top: 20px;">
+	<div class="col-lg-6">
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th colspan="2">รายละเอียด</th>
+					<th class="text-right">จำนวน</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td colspan="2">ได้รับเครดิต</td>
+					<td class="text-right" number-color="{{ Summary.credit }}">{{ Summary.amount }}</td>
+				</tr>
+				<tr>
+					<td colspan="3" class="alert-warning"><strong>เครดิตสมาชิก</strong></td>
+				</tr>
+				<tr>
+					<th>ชื่อผู้ใช้</th>
+					<th class="text-center">ระดับ</th>
+					<th></th>
+				</tr>
+				<tr ng-repeat="member in Summary.members">
+					<td><a ui-sref="user.dashboard.setting({user_id: member.user_id})">{{ member.username }}</a></td>
+					<td class="text-center">{{ Roles[member.user_role].text }}</td>
+					<td class="text-right" number-color="-{{ member.credit }}">-{{ member.credit }}</td>
+				</tr>
+				<tr>
+					<td colspan="2">เครดิตคงเหลือ</td>
+					<td class="text-right" number-color="{{ Summary.credit_balance }}">{{ Summary.credit_balance }}</td>
+				</tr>
+				<tr>
+					<td colspan="2">ยอดได้เสีย</th>
+					<td class="text-right" number-color="{{ Summary.netamount }}">{{ Summary.netamount }}</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="2">ยอดใช้ได้</th>
+					<th class="text-right" number-color="{{ Summary.credit_balance + Summary.netamount }}">{{ Summary.credit_balance + Summary.netamount }}</th>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+</div>

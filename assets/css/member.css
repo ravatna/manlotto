@@ -1,0 +1,9 @@
+/*.table-numbers tbody tr td, .table-numbers thead tr th{
+	text-align: center;
+}*/
+.table-numbers tbody tr td:nth-child(4) {
+	color: blue;
+}
+.selected-copy {
+	background-color: bisque;
+}

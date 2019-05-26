@@ -1,0 +1,65 @@
+<ol class="breadcrumb" style="margin-bottom: 0px;">
+	<li><a ui-sref="report.onprocess">รายงานการเดิมพัน</a></li>
+
+    <li ng-if="Referers.length==0" class="active">{{ Lottery.type | lotteryGroup }} งวดวันที่ {{ Lottery.lottery_date | lotteryDate }}</li>
+    <li ng-if="Referers.length>0"><a ui-sref="report.detail.by_member" ui-sref-opts="{ reload: true }">{{ Lottery.type | lotteryGroup }} งวดวันที่ {{ Lottery.lottery_date | lotteryDate }}</a></li>
+
+    <li ng-repeat="referer in Referers" ng-class="{'active':referer.active}">
+    	<span ng-if="referer.active">รายการแทง {{ referer.username }}</span>
+    	<a ng-if="!referer.active" ui-sref="report.detail.by_member.sub_member({member_id:referer.user_id})">{{ referer.username }}</a>
+    </li>
+
+</ol>
+<ul class="nav nav-tabs sub-nav">
+	<li ui-sref-active="active"><a ui-sref="report.detail.by_member" style="border-radius: 0px;"><i class="fa fa-users" aria-hidden="true"></i> แยกตามสมาชิก</a></li>
+	<li ui-sref-active="active"><a ui-sref="report.detail.by_type" style="border-radius: 0px;"><i class="fa fa-file-text-o" aria-hidden="true"></i> แยกตามประเภท</a></li>
+	<li ui-sref-active="active"><a ui-sref="report.detail.by_ticket" style="border-radius: 0px;"><i class="fa fa-list-ol" aria-hidden="true"></i> รายการโพย</a></li>
+</ul>
+
+<div class="table-responsive">
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th rowspan="2" width="50">ลำดับ</th>
+				<th rowspan="2">ชื่อผู้ใช้</th>
+				<th rowspan="2">โพย</th>
+				<th rowspan="2">เวลา</th>
+				<th rowspan="2">ประเภท</th>
+				<th rowspan="2">หมายเลข</th>
+				<th rowspan="2">จำนวน</th>
+				<th colspan="4">ถือหุ้น</th>
+			</tr>
+			<tr>
+				<th ng-class="{'alert-warning':Role=='Agent'}">เอเย่นต์</th>
+				<th ng-class="{'alert-warning':Role=='Master'}">มาสเตอร์</th>
+				<th ng-class="{'alert-warning':Role=='Senior'}">ซีเนียร์</th>
+				<th ng-class="{'alert-warning':Role=='Admin'}">บริษัท</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="number in Numbers">
+				<td class="text-center">{{ $index+1 }}</td>
+				<td class="text-center">{{ number.username }}</td>
+				<td class="text-center">{{ number.ticket_id }}</td>
+				<td class="text-center">{{ number.created_at | ShortDate }}</td>
+				<td class="text-center">{{ number.t_type | lotteryOptionName }}</td>
+				<td class="text-center" style="color:blue">{{ number.t_number }}</td>
+				<td class="text-right">{{ number.t_amount | number:2 }}</td>
+				<td class="text-right" ng-class="{'alert-warning':Role=='Agent'}">{{ number.ag_receive | number:2 }}</td>
+				<td class="text-right" ng-class="{'alert-warning':Role=='Master'}">{{ number.ma_receive | number:2 }}</td>
+				<td class="text-right" ng-class="{'alert-warning':Role=='Senior'}">{{ number.se_receive | number:2 }}</td>
+				<td class="text-right" ng-class="{'alert-warning':Role=='Admin'}">{{ number.ad_receive | number:2 }}</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th colspan="6" class="text-center">รวม</th>
+				<th class="text-right">{{ Summary.total_amount | number:2 }}</th>
+				<th class="text-right" ng-class="{'alert-warning':Role=='Agent'}">{{ Summary.ag_receive | number:2 }}</th>
+				<th class="text-right" ng-class="{'alert-warning':Role=='Master'}">{{ Summary.ma_receive | number:2 }}</th>
+				<th class="text-right" ng-class="{'alert-warning':Role=='Senior'}">{{ Summary.se_receive | number:2 }}</th>
+				<th class="text-right" ng-class="{'alert-warning':Role=='Admin'}">{{ Summary.ad_receive | number:2 }}</th>
+			</tr>
+		</tfoot>
+	</table>
+</div>

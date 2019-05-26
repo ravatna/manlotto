@@ -1,0 +1,193 @@
+<style type="text/css">
+.sub-nav>.active>a {
+	color: #31708f !important;
+    background-color: #d9edf7 !important;
+    border-color: #d9edf7 !important;
+}
+.f-strong {
+	font-weight: bold;
+}
+</style>
+
+<div class="container-fluid" ui-view>
+	<ol class="breadcrumb" style="margin-bottom: 0px;">
+	    <li class="active">รายงานการเดิมพัน</li>
+	</ol>
+	<ul class="nav nav-tabs sub-nav">
+		<li ui-sref-active="active"><a ui-sref="report.onprocess" style="border-radius: 0px;"><i class="fa fa-clock-o" aria-hidden="true"></i> รอผลเดิมพัน</a></li>
+		<li ui-sref-active="active"><a ui-sref="report.history" style="border-radius: 0px;"><i class="fa fa-history" aria-hidden="true"></i> รายงานผลได้เสีย</a></li>
+	</ul>
+
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-lg-6">
+			<div class="panel panel-default" style="border-radius: 0px;" ui-view>
+				<div class="panel-body">
+					<form class="form-inline">
+
+						<div>
+							<div class="form-group" style="margin-right: 15px;">
+								<label style="font-weight: normal;">
+							    	ประเภทหวย 
+							    	<select class="form-control" ng-model="filters.group">
+							    		<option value="">ทั้งหมด</option>
+							    		<option ng-repeat="(key, value) in lottery_type" value="{{ key }}">{{ value }}</option>
+							    	</select>
+							  	</label>
+						  	</div>
+						</div>
+						
+						<div style="margin-top: 15px;">
+							<div class="form-group" style="margin-right: 15px;">
+								<div class="radio">
+								  	<label>
+								    	<input type="radio" name="date_range" ng-model="$parent.$parent.date_range" value="today"> วันนี้
+								  	</label>
+								</div>
+						  	</div>
+
+						  	<div class="form-group" style="margin-right: 15px;">
+								<div class="radio">
+								  	<label>
+								    	<input type="radio" name="date_range" ng-model="$parent.$parent.date_range" value="yesterday"> เมื่อวาน
+								  	</label>
+								</div>
+						  	</div>
+
+						  	<div class="form-group" style="margin-right: 15px;">
+								<div class="radio">
+								  	<label>
+								    	<input type="radio" name="date_range" ng-model="$parent.$parent.date_range" value="this-week"> สัปดาห์นี้ (จันทร์ - อาทิตย์)
+								  	</label>
+								</div>
+						  	</div>
+
+						  	<div class="form-group">
+								<div class="radio">
+								  	<label>
+								    	<input type="radio" name="date_range" ng-model="$parent.$parent.date_range" value="last-week"> สัปดาห์ที่แล้ว (จันทร์ - อาทิตย์)
+								  	</label>
+								</div>
+						  	</div>
+						</div>
+
+						<div style="margin-top: 15px;">
+							<div class="form-group" style="margin-right: 15px;">
+								<label style="font-weight: normal; cursor: pointer;">
+							    	<input type="radio" name="date_range" ng-model="$parent.$parent.date_range" value="month"> เดือน 
+							    	<select class="form-control" ng-model="$parent.$parent.selected_month">
+							    		<option ng-repeat="month in report_month" value="{{ month.n }}">{{ month.name }}</option>
+							    	</select>
+							  	</label>
+						  	</div>
+						</div>
+
+						<div style="margin-top: 15px;">
+							<div class="form-group" style="margin-right: 15px;">
+							  	<label style="font-weight: normal; cursor: pointer;">
+							    	<input type="radio" name="date_range" ng-model="$parent.$parent.date_range" value="to-date"> ตั้งแต่ 
+							  	</label>
+						  	</div>
+						  	<div class="form-group" style="margin-right: 15px;">
+								<label style="font-weight: normal;">วันที่</label>
+								<input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd" ng-model="$parent.$parent.filters.from" is-open="$parent.$parent.isOpenDatePopup" datepicker-options="$parent.$parent.DateOption" ng-click="$parent.$parent.toggleOpenDatePopup()" ng-focus="$parent.$parent.toggleOpenDatePopup()" readonly>
+						  	</div>
+						  	<div class="form-group" style="margin-right: 15px;">
+								<label style="font-weight: normal;">ถึงวันที่</label>
+								<input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd" ng-model="$parent.$parent.filters.to" is-open="$parent.$parent.isCloseDatePopup" datepicker-options="$parent.$parent.DateOption" ng-click="$parent.$parent.toggleCloseDatePopup()" ng-focus="$parent.$parent.toggleCloseDatePopup()" readonly>
+						  	</div>
+						</div>
+					</form>
+				</div>
+				<div class="panel-footer text-right">
+					<button type="button" class="btn btn-primary" style="display: unset;" ng-click="searchReport()"><i class="fa fa-search" aria-hidden="true"></i> ค้นหา</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="table-responsive">
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th rowspan="2" style="vertical-align: middle;" class="text-center">ประเภทหวย</th>
+					<th rowspan="2" style="vertical-align: middle;" class="text-center">งวดวันที่</th>
+					<th colspan="4" class="text-center">สมาชิก</th>
+					<!--<th colspan="5" class="text-center">เอเย่นต์</th>-->
+					<th colspan="4" class="text-center alert-warning">บริษัท</th>
+				</tr>
+				<tr>
+					<th class="text-center">ยอดแทง</th>
+					<th class="text-center">ถูกรางวัล</th>
+					<th class="text-center">ค่าคอมฯ</th>
+					<th class="text-center">รวม</th>
+
+					<!--<th class="text-center">ถือหุ้น</th>
+					<th class="text-center">ถูกรางวัล</th>
+					<th class="text-center">ค่าคอมฯ</th>
+					<th class="text-center">รับส่วนต่าง</th>
+					<th class="text-center">รวม</th>-->
+
+					<th class="text-center alert-warning">ถือหุ้น</th>
+					<th class="text-center alert-warning">ถูกรางวัล</th>
+					<th class="text-center alert-warning">ค่าคอมฯ</th>
+					<th class="text-center alert-warning">รวม</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="summary in Summaries">
+					<td>{{ summary.lottery_type | lotteryGroup }}</td>
+					<td class="text-center">{{ summary.lottery_date | lotteryDate }}</td>
+					<td class="text-right" number-color="{{ summary.member.betting }}"></td>
+					<td class="text-right" number-color="{{ summary.member.win }}"></td>
+					<td class="text-right" number-color="{{ summary.member.discount }}"></td>
+					<td class="text-right" number-color="{{ summary.member.win + summary.member.discount + summary.member.betting }}"></td>
+
+					<!--<td class="text-right" number-color="{{ summary.receive }}"></td>
+					<td class="text-right" number-color="{{ summary.win }}"></td>
+					<td class="text-right" number-color="{{ summary.commission }}"></td>
+					<td class="text-right" number-color="{{ summary.diff_win }}"></td>
+					<td class="text-right" number-color="{{ summary.receive + summary.win + summary.commission + summary.diff_win }}"></td>-->
+
+					<td class="text-right alert-warning" number-color="{{ summary.admin.receive }}"></td>
+					<td class="text-right alert-warning" number-color="{{ summary.admin.win }}"></td>
+					<td class="text-right alert-warning" number-color="{{ summary.admin.commission }}"></td>
+					<td class="text-right alert-warning" number-color="{{ summary.admin.receive + summary.admin.win + summary.admin.commission }}"></td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="2" class="text-center">รวม</th>
+					<th class="text-right" number-color="{{ total.member.betting }}"></th>
+					<th class="text-right" number-color="{{ total.member.win }}"></th>
+					<th class="text-right" number-color="{{ total.member.discount }}"></th>
+					<th class="text-right" number-color="{{ total.member.sum }}"></th>
+
+					<!--<th class="text-right" number-color="{{ total.receive }}"></th>
+					<th class="text-right" number-color="{{ total.win }}"></th>
+					<th class="text-right" number-color="{{ total.commission }}"></th>
+					<th class="text-right" number-color="{{ total.diff_win }}"></th>
+					<th class="text-right" number-color="{{ total.summary }}"></th>-->
+
+					<th class="text-right alert-warning" number-color="{{ total.admin.receive }}"></th>
+					<th class="text-right alert-warning" number-color="{{ total.admin.win }}"></th>
+					<th class="text-right alert-warning" number-color="{{ total.admin.commission }}"></th>
+					<th class="text-right alert-warning" number-color="{{ total.admin.sum }}"></th>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+
+	<!--<table datatable dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" class="table table-hover table-striped">
+		<tfoot>
+			<tr>
+				<th colspan="2" class="text-center">รวม</th>
+				<th class="text-right" number-color="{{ total.receive }}"></th>
+				<th class="text-right" number-color="{{ total.commission }}"></th>
+				<th class="text-right" number-color="{{ total.win }}"></th>
+				<th class="text-right" number-color="{{ total.diff_win }}"></th>
+				<th class="text-right" number-color="{{ total.summary }}"></th>
+			</tr>
+		</tfoot>
+	</table>-->
+	
+</div>

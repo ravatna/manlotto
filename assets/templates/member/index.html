@@ -1,0 +1,69 @@
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div ng-controller="MenuCtrl" class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+            <a class="navbar-brand" href="./">Lottery</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li ui-sref="dashboard" ui-sref-active="active">
+                    <a href="#"><i class="fa fa-home" aria-hidden="true"></i> หน้าหลัก</a>
+                </li>
+                <li ui-sref="lottery" ui-sref-active="active">
+                    <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i> แทงหวย</a>
+                </li>
+
+                <li ui-sref="transaction" ng-class="{'active':is_state('ticket')||is_state('transaction')}">
+                    <a href="#"><i class="fa fa-list-ol" aria-hidden="true"></i> รายการโพย</a>
+                </li>
+                <li ui-sref="result" ui-sref-active="active">
+                    <a href="#"><i class="fa fa-trophy" aria-hidden="true"></i> ผลรางวัล</a>
+                </li>
+
+                <li ui-sref="report.history" ui-sref-active="active">
+                    <a href="#"><i class="fa fa-line-chart" aria-hidden="true"></i> รายงานเดิมพัน</a>
+                </li>
+
+                <!-- <li ui-sref="credit" ui-sref-active="active">
+                    <a href="#"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> รายงานเครดิต</a>
+                </li> -->
+            </ul>
+            <ul data-balance class="nav navbar-nav navbar-right">
+                <!-- <li>
+                    <a data-toggle="tooltip" data-placement="bottom" title="" data-original-title="เครดิต" ng-click="reloadBalance()" title="อัพเดตเครดิต">
+                        <i class="fa fa-refresh" ng-hide="is_loading"></i>
+                        เครดิต <span class="credit">{{credit_amount | number:2}}</span>
+                    </a>
+                </li> -->
+
+                <li>
+                    <a data-toggle="tooltip" data-placement="bottom" title="" data-original-title="เครดิต" ng-click="reloadBalance()" title="อัพเดตเครดิต">
+                        <i class="fa fa-refresh" ng-hide="is_loading"></i>
+                        เครดิตคงเหลือ <span class="credit">{{balance_amount | number:2}}</span>
+                    </a>
+                </li>
+
+                <!-- <li>
+                    <a data-toggle="tooltip" data-placement="bottom" title="" data-original-title="เครดิต" ng-click="reloadBalance()" title="อัพเดตยอด">
+                        ยอดได้เสีย <span class="credit">{{balance_amount | number:2}}</span>
+                    </a>
+                </li> -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{Profile.fullname}} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ui-sref="profile" ui-sref-active="active"><a href="#">ข้อมูลส่วนตัว</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#" class="logout" ng-click="logout()">ออกจากระบบ</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ui-view></ui-view>

@@ -1,0 +1,21 @@
+<style type="text/css">
+.sub-nav>.active>a {
+	color: #31708f !important;
+    background-color: #d9edf7 !important;
+    border-color: #d9edf7 !important;
+}
+</style>
+
+<div class="container-fluid">
+	<ol class="breadcrumb" style="margin-bottom: 0px;">
+	    <li class="active">รายงานการเงิน</li>
+	</ol>
+	<ul class="nav nav-tabs sub-nav">
+		<li ui-sref-active="active"><a ui-sref="financial.summary" style="border-radius: 0px;"><i class="fa fa-bar-chart" aria-hidden="true"></i> สรุปการเงิน</a></li>
+		<li ui-sref-active="active"><a ui-sref="financial.transaction" style="border-radius: 0px;"><i class="fa fa-list" aria-hidden="true"></i> ประวัติการเงิน</a></li>
+	</ul>
+
+	<div ui-view>
+		Dashboard!
+	</div>
+</div>

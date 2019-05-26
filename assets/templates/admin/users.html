@@ -1,0 +1,12 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h3 style="margin-top:4px;">รายชื่อสมาชิก</h3>
+        </div>
+        <div class="col-md-6 text-right">
+            <button class="btn btn-success btn-sm" ng-click="addUser()"><i class="fa fa-plus-circle" aria-hidden="true"></i> เพิ่มสมาชิก</button>
+        </div>
+    </div>
+    <hr style="margin-top:5px; margin-bottom:5px;">
+    <table datatable dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" class="table table-hover table-striped user-table"></table>
+</div>

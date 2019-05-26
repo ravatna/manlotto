@@ -1,0 +1,115 @@
+<div ui-view class="container-fluid box-lottery">
+    <div class="row">
+        
+        <div ng-repeat="lottery in Lotteries" class="col-md-4 col-sm-6">
+            <a ui-sref="lottery.group({group:lottery.group})">
+                <div class="well well-sm text-center" ng-class="lottery.data.status.user_status=='open' ? 'box-lottery-open' : 'box-lottery-close'">
+                    <h3 style="font-size:18px; font-weight: 600; margin:5px 0px;">{{ lottery.group | lotteryGroup }}</h3>
+                    <hr style="margin:15px 0px;">
+                    <div ng-if="lottery.data != null">
+                        <p>งวด {{ lottery.data.name }}</p>
+                        <p>ปิดรับ : {{ lottery.data.close_date }}</p>
+                        <p>
+                            <h2><span count-down="{{lottery.data.close_date_format}}|{{lottery.sv_time}}">กำลังตรวจสอบข้อมูล...</span></h2>
+                        </p>
+                    </div>
+                    <div ng-if="lottery.data == null">
+                        <p>
+                            <h2>ยังไม่เปิดรับแทง</h2>
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!--<div class="col-md-4 col-sm-6">
+            <a ui-sref="lottery.hanoi">
+                <div class="well well-sm text-center" ng-class="Lotteries.hanoi.status.user_status=='open' ? 'box-lottery-open' : 'box-lottery-close'">
+                    <h3 style="font-size:18px; font-weight: 600; margin:5px 0px;">หวยเวียดนาม ฮานอย</h3>
+                    <hr style="margin:15px 0px;">
+                    <div ng-if="Lotteries.hanoi!=null">
+                        <p>งวด {{ Lotteries.hanoi.name }}</p>
+                        <p>ปิดรับ : {{ Lotteries.hanoi.close_date }}</p>
+                        <p>
+                            <h2>{{ HanoiLotteryCountdown }}</h2>
+                        </p>
+                    </div>
+                    <div ng-if="Lotteries.hanoi==null">
+                        <p>
+                            <h2>ปิดรับแทง</h2>
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>-->
+
+    </div>
+	
+	<div class="rows">
+	<div class="col-md-3"  >
+	</div>
+	<div class="col-md-6"  >
+	<!-- <iframe src="https://lotto24hr.com/admin/#!/report/onprocess2" style="margin-top:0px; width:100%; height:800px; border:solid 0px;"></iframe>-->
+	
+	
+		<style type="text/css">
+			.table>thead>tr>th {
+				vertical-align: middle;
+				text-align: center;
+			}
+		 
+			.sub-nav>.active>a {
+				color: #31708f !important;
+				background-color: #d9edf7 !important;
+				border-color: #d9edf7 !important;
+			}
+		</style>
+
+		<div class="container-fluid">
+			<ol class="breadcrumb" style="margin-bottom: 0px;">
+				<li class="active">รายงานการเดิมพัน</li>
+			</ol>
+			<ul class="nav nav-tabs sub-nav">
+				<li ui-sref-active="active"><a target="_blank" ui-sref="report.onprocess2" style="border-radius: 0px;"><i class="fa fa-clock-o" aria-hidden="true"></i> รอผลเดิมพัน</a></li>		
+			</ul>
+
+			<div class="table-responsive">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th rowspan="2" style="width:180px;">ชนิดหวย<br>
+								<select class="form-control" ng-model="filter.group" ng-change="calTotal()">
+									<option value="">ทั้งหมด</option>
+									<option ng-repeat="open in Opens" value="{{ open }}">{{ open | lotteryGroup }}</option>
+								</select>
+							</th>
+							
+							<th style="width:230px;">งวดวันที่</th>			
+							<th>ยอดแทง</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="lottery in Lotteries2" ng-if="lottery.lottery_type==filter.group || filter.group==''">
+							<td><a target="_blank" ui-sref="report.detail.by_type_summary({lottery_id:lottery.lottery_id})">{{ lottery.lottery_type | lotteryGroup }}</a></td>
+							<td class="text-center">{{ lottery.lottery_date | lotteryDate }}</td>
+							<td class="text-right" >{{ lottery.report.member.bet*-1 | number:2 }}</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th colspan="2" class="text-center">รวม</th>
+							<th class="text-right" >{{ total.member_bet*-1 | number:2 }}</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+			
+		</div>
+
+	
+	</div>
+	<div class="col-md-3"  >
+	</div>
+	</div>
+</div>

@@ -1,0 +1,109 @@
+<ui-view>	
+	<ol class="breadcrumb" style="margin-bottom: 0px;">
+		<li><a ui-sref="report.onprocess">รายงานการเดิมพัน</a></li>
+
+	    <li ng-if="Referers.length==0" class="active">{{ Lottery.type | lotteryGroup }} งวดวันที่ {{ Lottery.lottery_date | lotteryDate }}</li>
+	    <li ng-if="Referers.length>0"><a ui-sref="report.detail.by_member" ui-sref-opts="{ reload: true }">{{ Lottery.type | lotteryGroup }} งวดวันที่ {{ Lottery.lottery_date | lotteryDate }}</a></li>
+
+	    <li ng-repeat="referer in Referers" ng-class="{'active':referer.active}">
+	    	<span ng-if="referer.active">{{ referer.username }}</span>
+	    	<a ng-if="!referer.active" ui-sref="report.detail.by_member.sub_member({member_id:referer.user_id})">{{ referer.username }}</a>
+	    </li>
+
+	</ol>
+	
+	<div ng-include="'../assets/templates/agent/report/detail-menu.html'" scope="" onload=""></div>
+
+	<div class="table-responsive">
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th rowspan="2">สมาชิก</th>
+					<th rowspan="2">ระดับ</th>
+					<th colspan="3">สมาชิก</th>
+					<th colspan="3" ng-if="Members[0].agent" ng-class="{'alert-warning':memberRole=='Agent'}">เอเย่นต์</th>
+					<th colspan="3" ng-if="Members[0].master" ng-class="{'alert-warning':memberRole=='Master'}">มาสเตอร์</th>
+					<th colspan="3" ng-if="Members[0].senior" ng-class="{'alert-warning':memberRole=='Senior'}">ซีเนียร์</th>
+					<th colspan="3" ng-class="{'alert-warning':memberRole=='Admin'}">บริษัท</th>
+				</tr>
+				<tr>
+					<th>ยอดแทง</th>
+					<th>ค่าคอม</th>
+					<th>รวม</th>
+
+					<th ng-if="Members[0].agent" ng-class="{'alert-warning':memberRole=='Agent'}">ถือหุ้น</th>
+					<th ng-if="Members[0].agent" ng-class="{'alert-warning':memberRole=='Agent'}">คอม</th>
+					<th ng-if="Members[0].agent" ng-class="{'alert-warning':memberRole=='Agent'}">รวม</th>
+
+					<th ng-if="Members[0].master" ng-class="{'alert-warning':memberRole=='Master'}">ถือหุ้น</th>
+					<th ng-if="Members[0].master" ng-class="{'alert-warning':memberRole=='Master'}">คอม</th>
+					<th ng-if="Members[0].master" ng-class="{'alert-warning':memberRole=='Master'}">รวม</th>
+
+					<th ng-if="Members[0].senior" ng-class="{'alert-warning':memberRole=='Senior'}">ถือหุ้น</th>
+					<th ng-if="Members[0].senior" ng-class="{'alert-warning':memberRole=='Senior'}">คอม</th>
+					<th ng-if="Members[0].senior" ng-class="{'alert-warning':memberRole=='Senior'}">รวม</th>
+					
+					<th ng-class="{'alert-warning':memberRole=='Admin'}">ถือหุ้น</th>
+					<th ng-class="{'alert-warning':memberRole=='Admin'}">คอม</th>
+					<th ng-class="{'alert-warning':memberRole=='Admin'}">รวม</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="member in Members">
+					<td>
+						<a ng-if="member.user_role!='Member'" ui-sref="report.detail.by_member.sub_member({member_id:member.user_id})">{{ member.username }}</a>
+						<a ng-if="member.user_role=='Member'" ui-sref="report.detail.by_member.ticket({member_id:member.user_id})">{{ member.username }}</a>
+					</td>
+					<td class="text-center">{{ Roles[member.user_role].text }}</td>
+					<td class="text-right" number-color="{{member.member.bet}}">{{ member.member.bet | number:2 }}</td>
+					<td class="text-right" number-color="{{member.member.discount}}">{{ member.member.discount | number:2 }}</td>
+					<td class="text-right" number-color="{{member.member.total}}">{{ member.member.total | number:2 }}</td>
+					
+					<td class="text-right" ng-if="member.agent" number-color="{{member.agent.receive}}" ng-class="{'alert-warning':memberRole=='Agent'}">{{ member.agent.receive | number:2 }}</td>
+					<td class="text-right" ng-if="member.agent" number-color="{{member.agent.commission}}" ng-class="{'alert-warning':memberRole=='Agent'}">{{ member.agent.commission | number:2 }}</td>
+					<td class="text-right" ng-if="member.agent" number-color="{{member.agent.total}}" ng-class="{'alert-warning':memberRole=='Agent'}">{{ member.agent.total | number:2 }}</td>
+					
+					<td class="text-right" ng-if="member.master" number-color="{{member.master.receive}}" ng-class="{'alert-warning':memberRole=='Master'}">{{ member.master.receive | number:2 }}</td>
+					<td class="text-right" ng-if="member.master" number-color="{{member.master.commission}}" ng-class="{'alert-warning':memberRole=='Master'}">{{ member.master.commission | number:2 }}</td>
+					<td class="text-right" ng-if="member.master" number-color="{{member.master.total}}" ng-class="{'alert-warning':memberRole=='Master'}">{{ member.master.total | number:2 }}</td>
+					
+					<td class="text-right" ng-if="member.senior" number-color="{{member.senior.receive}}" ng-class="{'alert-warning':memberRole=='Senior'}">{{ member.senior.receive | number:2 }}</td>
+					<td class="text-right" ng-if="member.senior" number-color="{{member.senior.commission}}" ng-class="{'alert-warning':memberRole=='Senior'}">{{ member.senior.commission | number:2 }}</td>
+					<td class="text-right" ng-if="member.senior" number-color="{{member.senior.total}}" ng-class="{'alert-warning':memberRole=='Senior'}">{{ member.senior.total | number:2 }}</td>
+					
+					<td class="text-right" number-color="{{member.admin.receive}}" ng-class="{'alert-warning':memberRole=='Admin'}">{{ member.admin.receive | number:2 }}</td>
+					<td class="text-right" number-color="{{member.admin.commission}}" ng-class="{'alert-warning':memberRole=='Admin'}">{{ member.admin.commission | number:2 }}</td>
+					<td class="text-right" number-color="{{member.admin.total}}" ng-class="{'alert-warning':memberRole=='Admin'}">{{ member.admin.total | number:2 }}</td>
+				</tr>
+			</tbody>
+			<tfoot ng-if="Members.length>0">
+				<tr>
+					<th colspan="2" class="text-center">รวม</th>
+					<th class="text-right" number-color="{{Summary.member_bet}}"></th>
+					<th class="text-right" number-color="{{Summary.member_discount}}"></th>
+					<th class="text-right" number-color="{{Summary.member_total}}"></th>
+
+					<th class="text-right" ng-if="Members[0].agent" number-color="{{Summary.ag_receive}}" ng-class="{'alert-warning':memberRole=='Agent'}"></th>
+					<th class="text-right" ng-if="Members[0].agent" number-color="{{Summary.ag_commission}}" ng-class="{'alert-warning':memberRole=='Agent'}"></th>
+					<th class="text-right" ng-if="Members[0].agent" number-color="{{Summary.ag_total}}" ng-class="{'alert-warning':memberRole=='Agent'}"></th>
+
+					<th class="text-right" ng-if="Members[0].master" number-color="{{Summary.ma_receive}}" ng-class="{'alert-warning':memberRole=='Master'}"></th>
+					<th class="text-right" ng-if="Members[0].master" number-color="{{Summary.ma_commission}}" ng-class="{'alert-warning':memberRole=='Master'}"></th>
+					<th class="text-right" ng-if="Members[0].master" number-color="{{Summary.ma_total}}" ng-class="{'alert-warning':memberRole=='Master'}"></th>
+
+					<th class="text-right" ng-if="Members[0].senior" number-color="{{Summary.se_receive}}" ng-class="{'alert-warning':memberRole=='Senior'}"></th>
+					<th class="text-right" ng-if="Members[0].senior" number-color="{{Summary.se_commission}}" ng-class="{'alert-warning':memberRole=='Senior'}"></th>
+					<th class="text-right" ng-if="Members[0].senior" number-color="{{Summary.se_total}}" ng-class="{'alert-warning':memberRole=='Senior'}"></th>
+
+					<th class="text-right" number-color="{{Summary.ad_receive}}" ng-class="{'alert-warning':memberRole=='Admin'}"></th>
+					<th class="text-right" number-color="{{Summary.ad_commission}}" ng-class="{'alert-warning':memberRole=='Admin'}"></th>
+					<th class="text-right" number-color="{{Summary.ad_total}}" ng-class="{'alert-warning':memberRole=='Admin'}"></th>
+
+				</tr>
+			</tfoot>
+		</table>
+
+		<div class="text-center" ng-if="Members.length==0">ไม่มีข้อมูล</div>
+
+	</div>
+</ui-view>

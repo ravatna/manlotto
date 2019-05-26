@@ -1,0 +1,39 @@
+<h3>{{captionTitle}}</h3>
+<span><button ng-click="orderByMe('t_name')">เรียงตามเลข น้อยไปหามาก</button>
+	<button ng-click="orderByMe('amount')">เรียงตามยอด แทง มากไปหาน้อย</button></span>
+	<hr/>
+	<!--
+		<div >
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th ng-click="orderByMe('t_name')">หมายเลข</th>
+						<th ng-click="orderByMe('amount')">ยอดแทง</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="report in Reports | orderBy:myOrderBy "  ng-if="$index >= 0 && $index < 25" >
+						<td class="text-center"  style="padding:2px;font-size:12px;color: blue">{{ report.t_number }}</td>						
+						<td class="text-right" style="padding:2px;font-size:12px;" number-color="{{ report.amount *-1 | number:2 }}"></td>
+					</tr>
+				</tbody>
+				
+			</table>
+		</div>
+		
+		
+		<hr/>
+		 -->
+		
+		<div >
+		<h4 style="align:center;"><u>{{captionSubTitle}}</u> <span style="font-size:10px; font-style:italic;">ข้อมูลเมื่อ: {{lastUpdate | date:'dd/MM/yyyy h:mm'}}</span></h4> 
+		
+		<ul style="columns: 4;    list-style-type: none">
+			<li ng-repeat="report in Reports | orderBy:myOrderBy "    >
+				<span  ng-if="(report.amount *-1) < 5000" class="text-center"  style="margin-left:-20px; padding:0px;font-size:11px;color: black"><strong>{{ report.t_number }}</strong> = {{ report.amount *-1 | number:0 }}</span>						
+				<span  ng-if="(report.amount *-1) >= 5000 && (report.amount *-1) < 10000" class="text-center"  style="margin-left:-20px; padding:0px;font-size:11px;color: orange"><strong>{{ report.t_number }}</strong> = {{ report.amount *-1 | number:0 }}</span>						
+				<span  ng-if="(report.amount *-1) >= 10000" class="text-center"  style="margin-left:-20px; padding:0px;font-size:11px;color: red"><strong>{{ report.t_number }}</strong> = {{ report.amount *-1 | number:0 }}</span>						
+			</li>
+		</ul>
+			
+		</div>

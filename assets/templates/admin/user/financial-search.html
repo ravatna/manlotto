@@ -1,0 +1,67 @@
+<div class="panel-body">
+	<form class="form-inline">					
+		<div style="margin-top: 15px;">
+			<div class="form-group" style="margin-right: 15px;">
+				<div class="radio">
+				  	<label>
+				    	<input type="radio" name="date_range" ng-model="date_range" value="today"> วันนี้
+				  	</label>
+				</div>
+		  	</div>
+
+		  	<div class="form-group" style="margin-right: 15px;">
+				<div class="radio">
+				  	<label>
+				    	<input type="radio" name="date_range" ng-model="date_range" value="yesterday"> เมื่อวาน
+				  	</label>
+				</div>
+		  	</div>
+
+		  	<div class="form-group" style="margin-right: 15px;">
+				<div class="radio">
+				  	<label>
+				    	<input type="radio" name="date_range" ng-model="date_range" value="this-week"> สัปดาห์นี้ (จันทร์ - อาทิตย์)
+				  	</label>
+				</div>
+		  	</div>
+
+		  	<div class="form-group">
+				<div class="radio">
+				  	<label>
+				    	<input type="radio" name="date_range" ng-model="date_range" value="last-week"> สัปดาห์ที่แล้ว (จันทร์ - อาทิตย์)
+				  	</label>
+				</div>
+		  	</div>
+		</div>
+
+		<div style="margin-top: 15px;">
+			<div class="form-group" style="margin-right: 15px;">
+				<label style="font-weight: normal; cursor: pointer;">
+			    	<input type="radio" name="date_range" ng-model="date_range" value="month"> เดือน 
+			    	<select class="form-control" ng-model="selected_month">
+			    		<option ng-repeat="month in report_month" value="{{ month.n }}">{{ month.name }}</option>
+			    	</select>
+			  	</label>
+		  	</div>
+		</div>
+
+		<div style="margin-top: 15px;">
+			<div class="form-group" style="margin-right: 15px;">
+			  	<label style="font-weight: normal; cursor: pointer;">
+			    	<input type="radio" name="date_range" ng-model="date_range" value="to-date"> ตั้งแต่ 
+			  	</label>
+		  	</div>
+		  	<div class="form-group" style="margin-right: 15px;">
+				<label style="font-weight: normal;">วันที่</label>
+				<input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd" ng-model="filters.from" is-open="isOpenDatePopup" datepicker-options="DateOption" ng-click="toggleOpenDatePopup()" ng-focus="toggleOpenDatePopup()" readonly>
+		  	</div>
+		  	<div class="form-group" style="margin-right: 15px;">
+				<label style="font-weight: normal;">ถึงวันที่</label>
+				<input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd" ng-model="filters.to" is-open="isCloseDatePopup" datepicker-options="DateOption" ng-click="toggleCloseDatePopup()" ng-focus="toggleCloseDatePopup()" readonly>
+		  	</div>
+		</div>
+	</form>
+</div>
+<div class="panel-footer text-right">
+	<button type="button" class="btn btn-primary" style="display: unset;" ng-click="searchReport()"><i class="fa fa-search" aria-hidden="true"></i> ค้นหา</button>
+</div>

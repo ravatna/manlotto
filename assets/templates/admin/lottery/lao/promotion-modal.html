@@ -1,0 +1,119 @@
+<div class="modal-header">
+    <i class="fa fa-times pull-right" style="cursor: pointer;" ng-click="cancelForm()"></i>
+    <h4 class="modal-title" id="modal-title">โปรโมชั่นหวยลาว</h4>
+</div>
+<div class="modal-body" id="modal-body">
+    <form name="formPromotion" class="form-horizontal">
+
+        <div class="form-group">
+            <label for="username" class="col-md-3 control-label">โปรโมชั่น: </label>
+            <div class="col-md-9">
+                <input type="text" ng-model="promotion.promotion_name" class="form-control" name="promotion_name" required ng-class="{'alert-danger':formError.promotion_name}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="status" class="col-md-3 control-label">สถานะ: </label>
+            <div class="col-md-9">
+                <select class="form-control" ng-model="promotion.promotion_status" name="promotion_status">
+                    <option value="on">เปิดใช้งาน</option>
+                    <option value="off">ยกเลิก</option>
+                </select>
+            </div>
+        </div>
+
+        <hr style="margin-top:5px; margin-bottom:5px;">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 40%">เลข</th>
+                    <th style="width: 30%" class="text-center">ส่วนลด (%)</th>
+                    <th style="width: 30%" class="text-center">จ่าย</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>3 ตัวบน</td>
+                    <td>
+                        <input type="number" class="form-control text-center" ng-model="promotion.promotion_info.three_number_top.discount" required ng-class="{'alert-danger':formError.three_top_discount}" name="three_top_discount">
+                    </td>
+                    <td>
+                        <input type="number" class="form-control text-center" ng-model="promotion.promotion_info.three_number_top.pay" required ng-class="{'alert-danger':formError.three_top_pay}" name="three_top_pay">
+                    </td>
+                </tr>
+                <tr>
+                    <td>3 ตัวบนโต๊ด</td>
+                    <td>
+                        <input type="number" class="form-control text-center" ng-model="promotion.promotion_info.three_number_tode.discount" required ng-class="{'alert-danger':formError.three_tode_discount}" name="three_tode_discount">
+                    </td>
+                    <td>
+                        <input type="number" class="form-control text-center" ng-model="promotion.promotion_info.three_number_tode.pay" required ng-class="{'alert-danger':formError.three_tode_pay}" name="three_tode_pay">
+                    </td>
+                </tr>
+                <tr>
+                    <td>2 ตัวบน</td>
+                    <td>
+                        <input type="number" class="form-control text-center" ng-model="promotion.promotion_info.two_number_top.discount" required ng-class="{'alert-danger':formError.two_top_discount}" name="two_top_discount">
+                    </td>
+                    <td>
+                        <input type="number" class="form-control text-center" ng-model="promotion.promotion_info.two_number_top.pay" required ng-class="{'alert-danger':formError.two_top_pay}" name="two_top_pay">
+                    </td>
+                </tr>
+                <tr>
+                    <td>2 ตัวบนโต๊ด</td>
+                    <td>
+                        <input type="number" class="form-control text-center" ng-model="promotion.promotion_info.two_number_tode.discount" required ng-class="{'alert-danger':formError.two_tode_discount}" name="two_tode_discount">
+                    </td>
+                    <td>
+                        <input type="number" class="form-control text-center" ng-model="promotion.promotion_info.two_number_tode.pay" required ng-class="{'alert-danger':formError.two_tode_pay}" name="two_tode_pay">
+                    </td>
+                </tr>
+                <tr>
+                    <td>2 ตัวล่าง</td>
+                    <td>
+                        <input type="number" class="form-control text-center" ng-model="promotion.promotion_info.two_number_bottom.discount" required ng-class="{'alert-danger':formError.two_bottom_discount}" name="two_bottom_discount">
+                    </td>
+                    <td>
+                        <input type="number" class="form-control text-center" ng-model="promotion.promotion_info.two_number_bottom.pay" required ng-class="{'alert-danger':formError.two_bottom_pay}" name="two_bottom_pay">
+                    </td>
+                </tr>
+                <tr>
+                    <td>วิ่งบน</td>
+                    <td>
+                        <input type="number" class="form-control text-center" ng-model="promotion.promotion_info.run_top.discount" required ng-class="{'alert-danger':formError.run_top_discount}" name="run_top_discount">
+                    </td>
+                    <td>
+                        <input type="number" class="form-control text-center" ng-model="promotion.promotion_info.run_top.pay" required ng-class="{'alert-danger':formError.run_top_pay}" name="run_top_pay">
+                    </td>
+                </tr>
+                <tr>
+                    <td>วิ่งล่าง</td>
+                    <td>
+                        <input type="number" class="form-control text-center" ng-model="promotion.promotion_info.run_bottom.discount" required ng-class="{'alert-danger':formError.run_bottom_discount}" name="run_bottom_discount">
+                    </td>
+                    <td>
+                        <input type="number" class="form-control text-center" ng-model="promotion.promotion_info.run_bottom.pay" required ng-class="{'alert-danger':formError.run_bottom_pay}" name="run_bottom_pay">
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <hr style="margin-top:5px; margin-bottom:5px;">
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>หมายเหตุ</label>
+                <textarea class="form-control" ng-model="promotion.promotion_note"></textarea>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" type="button" ng-click="cancelForm()">ยกเลิก</button>
+    <button class="btn btn-primary" type="button" ng-click="savePromotion()">บันทึก</button>
+</div>

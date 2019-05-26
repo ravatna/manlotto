@@ -1,0 +1,35 @@
+<ol class="breadcrumb" style="margin-bottom: 0px;">
+	<li><a ui-sref="report.onprocess">รายงานการเดิมพัน</a></li>
+    <li class="active">{{ Lottery.type | lotteryGroup }} งวดวันที่ {{ Lottery.lottery_date | lotteryDate }}</li>
+</ol>
+
+<div ng-include="'../assets/templates/agent/report/detail-menu.html'" scope="" onload=""></div>
+
+<div class="alert alert-warning" style="margin-top: 15px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> กรุณาใส่จำนวนเงินที่ท่านต้องการถือสู้ของ <strong>{{ Lottery.type | lotteryGroup }} งวดวันที่ {{ Lottery.lottery_date | lotteryDate }}</strong> <strong style="color: red">ต่อตัว</strong> ของแต่ละประเภทลงในช่องด้านล่าง เพื่อเปิดรับของ หากไม่ต้องการถือสู้ในประเภทใด ๆ ให้ใส่ 0</div>
+
+<div>
+	<form class="form-inline">
+	  	<div class="form-group">
+	    	<label>กรอกเท่ากัน</label>
+	    	<input type="text" class="form-control" input-number ng-model="allInput">
+	  	</div>
+	  	<button class="btn btn-default" ng-click="allSubmit()">ยืนยัน</button>
+	</form>
+</div>
+
+<table class="table table-bordered table-hover" style="margin-top: 15px; width: auto;">
+	<thead>
+		<tr>
+			<th class="text-center" ng-repeat="(key, value) in limit.limit_option">{{ key | lotteryOptionName }}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td width="120" ng-repeat="(key, value) in limit.limit_option">
+				<input type="text" class="form-control text-right" ng-model="limit.limit_option[key]" input-number>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<button class="btn btn-success btn-lg" ng-click="saveLimit()">บันทึก</button>

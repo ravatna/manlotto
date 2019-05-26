@@ -1,0 +1,26 @@
+<div class="panel-body">
+	<table class="table table-noborder">
+		<tbody>
+			<tr>
+				<td class="text-right" style="width: 20%">ยอดที่ถอนได้</td>
+				<td colspan="2"><strong number-color="{{ user.balance }}"></strong></td>
+			</tr>
+  			<tr>
+  				<td class="text-right" style="width: 20%">ถอนจำนวนเงิน</td>
+  				<td style="width: 30%">
+  					<input type="text" class="form-control" name="amount" input-number autocomplete="off" ng-model="withdraw.amount" placeholder="จำนวนเงินที่ต้องการถอน">
+  				</td>
+  				<td style="width: 50%"></td>
+  			</tr>
+  			<tr>
+  				<td class="text-right" style="width: 20%">รายละเอียด</td>
+  				<td style="width: 80%" colspan="2">
+  					<textarea class="form-control" ng-model="withdraw.note" placeholder="รายละเอียดเพิ่มเติม"></textarea>
+  				</td>
+  			</tr>
+  		</tbody>
+	</table>
+</div>
+<div class="panel-footer text-right">
+	<button type="button" class="btn btn-danger" style="display: unset;" ng-click="saveWithdraw()"><i class="fa fa-share-square" aria-hidden="true"></i> ถอนเงิน</button>
+</div>

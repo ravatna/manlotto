@@ -1,0 +1,21 @@
+<style>
+.table thead tr th:nth-child(1) {
+    text-align: center;
+}
+
+.table tbody tr td:nth-child(1) {
+    text-align: center;
+}
+</style>
+<table datatable dt-options="dtOptions" dt-columns="dtColumns" dt-instance="$parent.dtInstance" class="table table-hover">
+    <tfoot>
+        <tr>
+            <th colspan="4" class="text-center">รวม</th>
+            <th>{{ Summary.amount | number:2 }}</th>
+            <th>{{ Summary.discount | number:2 }}</th>
+            <th>{{ Summary.credit | number:2 }}</th>
+            <th>{{ Summary.win_amount | number:2 }}</th>
+            <th></th>
+        </tr>
+    </tfoot>
+</table>

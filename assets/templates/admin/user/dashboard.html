@@ -1,0 +1,20 @@
+<style type="text/css">
+.sub-nav>.active>a {
+	color: #31708f !important;
+    background-color: #d9edf7 !important;
+    border-color: #d9edf7 !important;
+}
+</style>
+
+<ol class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a ui-sref="user">สมาชิก</a></li>
+    <li class="active">ข้อมูลสมาชิก</li>
+</ol>
+<ul class="nav nav-tabs sub-nav">
+	<li ui-sref-active="active"><a ui-sref="user.dashboard.setting({user_id: userId})" style="border-radius: 0px;"><i class="fa fa-cog" aria-hidden="true"></i> ตั้งค่าสมาชิก</a></li>
+	<li ui-sref-active="active"><a ui-sref="user.dashboard.financial.search({user_id: userId})" style="border-radius: 0px;"><i class="fa fa-money" aria-hidden="true"></i> การเงินสมาชิก</a></li>
+</ul>
+
+<div ui-view>
+	Dashboard!
+</div>

@@ -1,0 +1,117 @@
+<style type="text/css">
+.table>thead>tr>th {
+	vertical-align: middle;
+	text-align: center;
+}
+</style>
+
+<style type="text/css">
+.sub-nav>.active>a {
+	color: #31708f !important;
+    background-color: #d9edf7 !important;
+    border-color: #d9edf7 !important;
+}
+</style>
+
+<div class="container-fluid">
+	<ol class="breadcrumb" style="margin-bottom: 0px;">
+	    <li class="active">รายงานการเดิมพัน</li>
+	</ol>
+	<ul class="nav nav-tabs sub-nav">
+		<li ui-sref-active="active"><a ui-sref="report.onprocess" style="border-radius: 0px;"><i class="fa fa-clock-o" aria-hidden="true"></i> รอผลเดิมพัน</a></li>
+		<li ui-sref-active="active"><a ui-sref="report.history" style="border-radius: 0px;"><i class="fa fa-history" aria-hidden="true"></i> รายงานผลได้เสีย</a></li>
+	</ul>
+
+	<div class="table-responsive">
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th rowspan="2">ชนิดหวย<br>
+						<select class="form-control" ng-model="filter.group" ng-change="calTotal()">
+							<option value="">ทั้งหมด</option>
+							<option ng-repeat="open in Opens" value="{{ open }}">{{ open | lotteryGroup }}</option>
+						</select>
+					</th>
+					<th rowspan="2">งวดวันที่</th>
+					<th colspan="3">สมาชิก</th>
+					<th colspan="3" ng-if="Lotteries[0].report.agent!=false" ng-class="{'alert-warning':memberRole=='Agent'}">เอเย่นต์</th>
+					<th colspan="3" ng-if="Lotteries[0].report.master!=false" ng-class="{'alert-warning':memberRole=='Master'}">มาสเตอร์</th>
+					<th colspan="3" ng-if="Lotteries[0].report.senior!=false" ng-class="{'alert-warning':memberRole=='Senior'}">ซีเนียร์</th>
+					<th colspan="3" ng-class="{'alert-warning':memberRole=='Admin'}">บริษัท</th>
+				</tr>
+				<tr>
+					<th>ยอดแทง</th>
+					<th>ค่าคอม</th>
+					<th>รวม</th>
+
+					<th ng-if="Lotteries[0].report.agent!=false" ng-class="{'alert-warning':memberRole=='Agent'}">ถือหุ้น</th>
+					<th ng-if="Lotteries[0].report.agent!=false" ng-class="{'alert-warning':memberRole=='Agent'}">คอม</th>
+					<th ng-if="Lotteries[0].report.agent!=false" ng-class="{'alert-warning':memberRole=='Agent'}">รวม</th>
+
+					<th ng-if="Lotteries[0].report.master!=false" ng-class="{'alert-warning':memberRole=='Master'}">ถือหุ้น</th>
+					<th ng-if="Lotteries[0].report.master!=false" ng-class="{'alert-warning':memberRole=='Master'}">คอม</th>
+					<th ng-if="Lotteries[0].report.master!=false" ng-class="{'alert-warning':memberRole=='Master'}">รวม</th>
+
+					<th ng-if="Lotteries[0].report.senior!=false" ng-class="{'alert-warning':memberRole=='Senior'}">ถือหุ้น</th>
+					<th ng-if="Lotteries[0].report.senior!=false" ng-class="{'alert-warning':memberRole=='Senior'}">คอม</th>
+					<th ng-if="Lotteries[0].report.senior!=false" ng-class="{'alert-warning':memberRole=='Senior'}">รวม</th>
+					
+					<th ng-class="{'alert-warning':memberRole=='Admin'}">ถือหุ้น</th>
+					<th ng-class="{'alert-warning':memberRole=='Admin'}">คอม</th>
+					<th ng-class="{'alert-warning':memberRole=='Admin'}">รวม</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="lottery in Lotteries" ng-if="lottery.lottery_type==filter.group || filter.group==''">
+					<td><a ui-sref="report.detail({lottery_id:lottery.lottery_id})">{{ lottery.lottery_type | lotteryGroup }}</a></td>
+					<td class="text-center">{{ lottery.lottery_date | lotteryDate }}</td>
+					<td class="text-right" number-color="{{lottery.report.member.bet}}">{{ lottery.report.member.bet | number:2 }}</td>
+					<td class="text-right" number-color="{{lottery.report.member.discount}}">{{ lottery.report.member.discount | number:2 }}</td>
+					<td class="text-right" number-color="{{lottery.report.member.total}}">{{ lottery.report.member.total | number:2 }}</td>
+					
+					<td class="text-right" ng-if="lottery.report.agent!=false" number-color="{{lottery.report.agent.receive}}" ng-class="{'alert-warning':memberRole=='Agent'}">{{ lottery.report.agent.receive | number:2 }}</td>
+					<td class="text-right" ng-if="lottery.report.agent!=false" number-color="{{lottery.report.agent.commission}}" ng-class="{'alert-warning':memberRole=='Agent'}">{{ lottery.report.agent.commission | number:2 }}</td>
+					<td class="text-right" ng-if="lottery.report.agent!=false" number-color="{{lottery.report.agent.total}}" ng-class="{'alert-warning':memberRole=='Agent'}">{{ lottery.report.agent.total | number:2 }}</td>
+					
+					<td class="text-right" ng-if="lottery.report.master!=false" number-color="{{lottery.report.master.receive}}" ng-class="{'alert-warning':memberRole=='Master'}">{{ lottery.report.master.receive | number:2 }}</td>
+					<td class="text-right" ng-if="lottery.report.master!=false" number-color="{{lottery.report.master.commission}}" ng-class="{'alert-warning':memberRole=='Master'}">{{ lottery.report.master.commission | number:2 }}</td>
+					<td class="text-right" ng-if="lottery.report.master!=false" number-color="{{lottery.report.master.total}}" ng-class="{'alert-warning':memberRole=='Master'}">{{ lottery.report.master.total | number:2 }}</td>
+					
+					<td class="text-right" ng-if="lottery.report.senior!=false" number-color="{{lottery.report.senior.receive}}" ng-class="{'alert-warning':memberRole=='Senior'}">{{ lottery.report.senior.receive | number:2 }}</td>
+					<td class="text-right" ng-if="lottery.report.senior!=false" number-color="{{lottery.report.senior.commission}}" ng-class="{'alert-warning':memberRole=='Senior'}">{{ lottery.report.senior.commission | number:2 }}</td>
+					<td class="text-right" ng-if="lottery.report.senior!=false" number-color="{{lottery.report.senior.total}}" ng-class="{'alert-warning':memberRole=='Senior'}">{{ lottery.report.senior.total | number:2 }}</td>
+					
+					<td class="text-right" number-color="{{lottery.report.admin.receive}}" ng-class="{'alert-warning':memberRole=='Admin'}">{{ lottery.report.admin.receive | number:2 }}</td>
+					<td class="text-right" number-color="{{lottery.report.admin.commission}}" ng-class="{'alert-warning':memberRole=='Admin'}">{{ lottery.report.admin.commission | number:2 }}</td>
+					<td class="text-right" number-color="{{lottery.report.admin.total}}" ng-class="{'alert-warning':memberRole=='Admin'}">{{ lottery.report.admin.total | number:2 }}</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="2" class="text-center">รวม</th>
+					<th class="text-right" number-color="{{total.member_bet}}">{{ total.member_bet | number:2 }}</th>
+					<th class="text-right" number-color="{{total.member_discount}}">{{ total.member_discount | number:2 }}</th>
+					<th class="text-right" number-color="{{total.member_total}}">{{ total.member_total | number:2 }}</th>
+
+					<th class="text-right" ng-if="Lotteries[0].report.agent!=false" number-color="{{total.agent_receive}}" ng-class="{'alert-warning':memberRole=='Agent'}">{{total.agent_receive | number:2 }}</th>
+					<th class="text-right" ng-if="Lotteries[0].report.agent!=false" number-color="{{total.agent_commission}}" ng-class="{'alert-warning':memberRole=='Agent'}">{{ total.agent_commission | number:2 }}</th>
+					<th class="text-right" ng-if="Lotteries[0].report.agent!=false" number-color="{{total.agent_total}}" ng-class="{'alert-warning':memberRole=='Agent'}">{{ total.agent_total | number:2 }}</th>
+
+					<th class="text-right" ng-if="Lotteries[0].report.master!=false" number-color="{{total.master_receive}}" ng-class="{'alert-warning':memberRole=='Master'}">{{ total.master_receive | number:2 }}</th>
+					<th class="text-right" ng-if="Lotteries[0].report.master!=false" number-color="{{total.master_commission}}" ng-class="{'alert-warning':memberRole=='Master'}">{{ total.master_commission | number:2 }}</th>
+					<th class="text-right" ng-if="Lotteries[0].report.master!=false" number-color="{{total.master_total}}" ng-class="{'alert-warning':memberRole=='Master'}">{{ total.master_total | number:2 }}</th>
+
+					<th class="text-right" ng-if="Lotteries[0].report.senior!=false" number-color="{{total.senior_receive}}" ng-class="{'alert-warning':memberRole=='Senior'}">{{ total.senior_receive | number:2 }}</th>
+					<th class="text-right" ng-if="Lotteries[0].report.senior!=false" number-color="{{total.senior_commission}}" ng-class="{'alert-warning':memberRole=='Senior'}">{{ total.senior_commission | number:2 }}</th>
+					<th class="text-right" ng-if="Lotteries[0].report.senior!=false" number-color="{{total.senior_total}}" ng-class="{'alert-warning':memberRole=='Senior'}">{{ total.senior_total | number:2 }}</th>
+
+					<th class="text-right" number-color="{{total.admin_receive}}" ng-class="{'alert-warning':memberRole=='Admin'}">{{ total.admin_receive | number:2 }}</th>
+					<th class="text-right" number-color="{{total.admin_commission}}" ng-class="{'alert-warning':memberRole=='Admin'}">{{ total.admin_commission | number:2 }}</th>
+					<th class="text-right" number-color="{{total.admin_total}}" ng-class="{'alert-warning':memberRole=='Admin'}">{{ total.admin_total | number:2 }}</th>
+
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	
+</div>

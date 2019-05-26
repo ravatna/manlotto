@@ -1,0 +1,25 @@
+<style>
+.table tbody tr td:nth-child(2) {
+    color: blue;
+}
+</style>
+<form class="form-inline" style="margin-top: 15px;">
+    <div class="form-group">
+        <label>ประเภท</label>
+        <select class="form-control" ng-change="numberFilter()" ng-model="filter">
+            <option value="">ทั้งหมด</option>
+            <option ng-repeat="option in $parent.lotteryData.open_options" ng-value="option">{{ option | lotteryOptionName }}</option>
+        </select>
+    </div>
+</form>
+<br>    
+<table datatable dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" class="table table-hover">
+    <tfoot>
+        <tr>
+            <th colspan="2" class="text-center">รวม</th>
+            <th>{{ matchAbs(Summary.amount) | number:2 }}</th>
+            <th>{{ matchAbs(Summary.discount) | number:2 }}</th>
+            <th>{{ matchAbs(Summary.credit) | number:2 }}</th>
+        </tr>
+    </tfoot>
+</table>

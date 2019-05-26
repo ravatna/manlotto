@@ -1,0 +1,209 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="dashboard">หน้าหลัก</a></li>
+    <li><a ui-sref="lottery">แทงหวย</a></li>
+    <li><a ui-sref="lottery.lao">หวยลาว</a></li>
+    <li class="active">โปรโมชั่น - {{ Promotion.promotion_name }}</li>
+</ol>
+
+<div class="row">
+    <div class="col-md-12">
+        <h3 style="margin-top:4px;">หวยลาว งวดวันที่ {{ Lottery.name }} <span ng-if="Countdown">(<span ng-class="Lottery.status.user_status=='open' ? 'alert-success' : 'alert-danger'">{{ Countdown }}</span>)</span></h3>
+    </div>
+</div>
+
+<div class="row" style="margin-top: 20px;">
+	<div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> แทงหวย
+            </div>
+            <div class="panel-body">
+                <form id="ticket-form">
+                    <div ng-if="hasCloseNumbers()" class="form-group alert alert-warning">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th colspan="2"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> รายการที่ปิดรับ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-if="Lottery.options.three_number_top">
+                                    <td>3 ตัวบนตรง</td>
+                                    <td>{{ Lottery.options.three_number_top }}</td>
+                                </tr>
+                                <tr ng-if="Lottery.options.three_number_tode">
+                                    <td>3 ตัวโต๊ด</td>
+                                    <td>{{ Lottery.options.three_number_tode }}</td>
+                                </tr>
+                                <tr ng-if="Lottery.options.two_number_top">
+                                    <td>2 ตัวบน</td>
+                                    <td>{{ Lottery.options.two_number_top }}</td>
+                                </tr>
+                                <tr ng-if="Lottery.options.two_number_bottom">
+                                    <td>2 ตัวล่าง</td>
+                                    <td>{{ Lottery.options.two_number_bottom }}</td>
+                                </tr>
+                                <tr ng-if="Lottery.options.two_number_tode">
+                                    <td>2 ตัวบนโต๊ด</td>
+                                    <td>{{ Lottery.options.two_number_tode }}</td>
+                                </tr>
+                                <tr ng-if="Lottery.options.run_top">
+                                    <td>วิ่งบน</td>
+                                    <td>{{ Lottery.options.run_top }}</td>
+                                </tr>
+                                <tr ng-if="Lottery.options.run_bottom">
+                                    <td>วิ่งล่าง</td>
+                                    <td>{{ Lottery.options.run_bottom }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-group">
+                        <label>เลือกโพย</label>
+                        <select class="form-control" ng-model="ticket.ticket_id" ng-change="onTicket()">
+                            <option value="0">โพยใหม่</option>
+                            <option ng-repeat="s_ticket in TicketNumbers" ng-value="{{ s_ticket.ticket_id }}">เลขที่ {{ s_ticket.ticket_id }} {{ s_ticket.ticket_name }}</option>
+                        </select>
+                    </div>
+                	<div class="form-group">
+    				    <label>ชื่อโพย</label>
+    				    <input type="text" id="ticket-name" class="form-control" placeholder="ชื่อโพย..." ng-model="ticket.name" ng-enter>
+    			  	</div>
+                    <!--<div class="form-group">
+                        <label>กรอกเร็ว</label>
+                        <input type="text" class="form-control" placeholder="แทงเร็ว..." ng-model="quickInput" ng-keypress="QuickNumber($event)">
+                    </div>-->
+                    <table class="table">
+                    	<thead>
+                    		<tr>
+                    			<th class="text-center">หมายเลข</th>
+                    			<th class="text-center">ตัวบน</th>
+                    			<th class="text-center">ตัวล่าง</th>
+                    			<th class="text-center">ตัวโต๊ด</th>
+                    		</tr>
+                            <tr>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-xs btn-info" ng-click="shuffleNumbers()">กลับเลข</button>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-xs btn-info" ng-click="copyAmounts('top')">คัดลอกยอด</button>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-xs btn-info" ng-click="copyAmounts('bottom')">คัดลอกยอด</button>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-xs btn-info" ng-click="copyAmounts('tode')">คัดลอกยอด</button>
+                                </td>
+                            </tr>
+                    	</thead>
+                    	<tbody>
+                    		<tr ng-repeat="input_number in Numbers" ng-class="{'selected-copy': cacheIndex == $index}">
+                    			<td>
+                    				<input type="text" class="form-control text-center alert-success" maxlength="4" ng-keypress="key_number($event, $index, input_number)" ng-blur="check_number($event, $index, input_number)" ng-model="input_number.number" ng-enter>
+                    			</td>
+                    			<td>
+                    				<input type="text" class="form-control text-center" maxlength="5" ng-keypress="key_amount($event, $index, 'top', input_number)" ng-model="input_number.top.amount" ng-disabled="!isAvailable('top', input_number.number)" ng-enter>
+                    			</td>
+                    			<td>
+                    				<input type="text" class="form-control text-center" maxlength="6" ng-keypress="key_amount($event, $index,  'bottom', input_number)" ng-model="input_number.bottom.amount" ng-disabled="!isAvailable('bottom', input_number.number)" ng-enter>
+                    			</td>
+                    			<td>
+                    				<input type="text" class="form-control text-center" maxlength="6" ng-keypress="key_amount($event, $index, 'tode', input_number)" ng-model="input_number.tode.amount" ng-disabled="!isAvailable('tode', input_number.number)" ng-enter>
+                    			</td>
+                    		</tr>
+                            <tr>
+                                <td colspan="4">
+                                    <button type="button" class="btn btn-success btn-sm btn-block btn-link" ng-click="addNumbers()"><i class="fa fa-plus-circle" aria-hidden="true"></i> เพิ่มช่อง</button>
+                                </td>
+                            </tr>
+                    		<tr class="alert-info">
+    	                		<td colspan="4">
+    								<div class="pull-left text-info">เครดิตปัจจุบัน</div>
+    								<div class="pull-right text-info">
+    									<span>{{ Balance | number }}</span> 
+    									<i class="fa fa-money" aria-hidden="true"></i>
+    								</div>
+    								<div class="clearfix"></div>
+    							</td>
+    						</tr>
+    						<tr class="alert-danger">
+    							<td colspan="4">
+    								<div class="pull-left text-danger">เครดิตที่ใช้</div>
+    								<div class="pull-right text-danger">
+    									<span>{{ Credit.use | number }}</span>
+    									<i class="fa fa-money" aria-hidden="true"></i>
+    								</div>
+    								<div class="clearfix"></div>
+    							</td>
+    						</tr>
+    						<tr class="alert-warning">
+    							<td colspan="4">
+    								<div class="pull-left text-warning">เครดิตส่วนลด</div>
+    								<div class="pull-right text-warning">
+    									<span>{{ Credit.discount | number }}</span>
+    									<i class="fa fa-money" aria-hidden="true"></i>
+    								</div>
+    								<div class="clearfix"></div>
+    							</td>
+    						</tr>
+    						<tr class="alert-success">
+    							<td colspan="4">
+    								<div class="pull-left text-success">เครดิตคงเหลือ</div>
+    								<div class="pull-right text-success">
+    									<span>{{ Credit.balance | number }}</span>
+    									<i class="fa fa-money" aria-hidden="true"></i>
+    								</div>
+    								<div class="clearfix"></div>
+    							</td>
+    						</tr>
+                    	</tbody>
+                    </table>
+                    <div class="text-right">
+                    	<button type="button" class="btn btn-primary" ng-disabled="Credit.use==0" ng-click="saveTicket()">ส่งโพย</button>
+                    	<button type="button" class="btn btn-default" ng-click="clearNumber()">เคลียร์</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+    	<div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="pull-left" style="font-size: 120%; padding-top: 5px;">
+                	<i class="fa fa-list-ol" aria-hidden="true"></i> รายการแทง
+                </div>
+                <div class="pull-right">
+                    <form class="form-inline">
+            			<select class="form-control" ng-change="selectTicket()" ng-model="select_ticket_id">
+            				<option value="0">-- แสดงทุกโพย --</option>
+                            <option ng-repeat="ticket in TicketNumbers" ng-value="{{ ticket.ticket_id }}">เลขที่ {{ ticket.ticket_id }} {{ ticket.ticket_name }}</option>
+            			</select>
+                        <button type="button" class="btn btn-sm btn-info" ng-click="SelectedAll()"><i class="fa fa-check-square-o" aria-hidden="true"></i> เลือกทั้งหมด</button>
+                        <button ng-if="cancel_ids.length > 0" type="button" class="btn btn-sm btn-danger" ng-click="CancelSelected()"><i class="fa fa-times" aria-hidden="true"></i> ลบที่เลือก {{cancel_ids.length}} รายการ</button>
+                    </form>
+        		</div>
+        		<div class="clearfix"></div>
+            </div>
+            <div class="panel-body" style="padding-top: 0px;">
+            	<div class="row">
+                    <table datatable dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" class="table table-hover table-striped table-numbers">
+                        <tfoot>
+                            <tr>
+                                <th colspan="5" class="text-center">รวม</th>
+                                <th class="text-center">{{ Summary.amount | number }}</th>
+                                <th class="text-center">{{ Summary.discount | number }}</th>
+                                <th class="text-center">{{ Summary.credit | number }}</th>
+                                <th colspan="2" class="text-center"></th>
+                            </tr>
+                            <tr>
+                                <td colspan="9" class="text-right" style="color: red;">
+                                    สามารถยกเลิกได้ภายใน 30 นาทีหลังส่งข้อมูล และก่อนเวลาปิดรับ 30 นาที
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+	            </div>
+            </div>
+        </div>
+    </div>
+</div>

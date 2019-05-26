@@ -1,0 +1,80 @@
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div ng-controller="MenuCtrl" class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+            <a class="navbar-brand" href="./">Lottery</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                
+                <li ui-sref-active="active">
+                    <a ui-sref="dashboard"><i class="fa fa-home" aria-hidden="true"></i> หน้าหลัก</a>
+                </li>
+
+                <li ui-sref-active="active">
+                    <a ui-sref="report"><i class="fa fa-line-chart" aria-hidden="true"></i> รายงานเดิมพัน</a>
+                </li>
+
+                <li ui-sref-active="active">
+                    <a ui-sref="financial"><i class="fa fa-money" aria-hidden="true"></i> รายงานการเงิน</a>
+                </li>
+
+                <li ui-sref-active="active">
+                    <a ui-sref="setting"><i class="fa fa-cogs" aria-hidden="true"></i> ตั้งค่ารับของ</a>
+                </li>
+
+                <li class="dropdown" ui-sref-active="active">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> สมาชิก <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="user">รายชื่อสมาชิก</a></li>
+                        <li><a ui-sref="user.add">เพิ่มสมาชิก</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+            <ul data-balance class="nav navbar-nav navbar-right">
+
+                <!-- <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-usd" aria-hidden="true"></i> เครดิต {{profile.credit | number:2}} <span class="caret"></span></a>
+                    <ul class="dropdown-menu" style="width: 300px;">
+                        <li><a>เครดิต <strong style="float: right;">{{profile.credit | number:2}}</strong></a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a>ใช้ไป <strong number-color="{{profile.used_credit}}" style="float: right;">{{profile.used_credit | number:2}}</strong></a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a>คงเหลือ <strong style="float: right;">{{profile.credit_balance | number:2}}</strong></a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a>ได้เสีย <strong number-color="{{profile.balance}}" style="float: right;">{{profile.balance | number:2}}</strong></a></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="text-center"><a ui-sref="financial.summary" style="color: blue;">สรุปการเงิน</a></li>
+                    </ul>
+                </li> -->
+
+                <li>
+                    <a data-toggle="tooltip" data-placement="bottom" title="" data-original-title="เครดิต" ng-click="reloadBalance()" title="อัพเดตเครดิต">
+                        <i class="fa fa-refresh" ng-hide="is_loading"></i>
+                        เครดิตคงเหลือ <span class="credit">{{profile.credit_balance | number:2}}</span>
+                    </a>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{Profile.fullname}} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ui-sref="profile" ui-sref-active="active"><a href="#">ข้อมูลส่วนตัว</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#" class="logout" ng-click="logout()">ออกจากระบบ</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div style="padding-bottom:50px;">
+    <ui-view></ui-view>
+</div>

@@ -1,0 +1,85 @@
+<div ui-view>
+    <ol class="breadcrumb">
+        <li><a ui-sref="dashboard">หน้าหลัก</a></li>
+        <li><a ui-sref="lottery">แทงหวย</a></li>
+        <li><a ui-sref="lottery.lao">หวยลาว</a></li>
+        <li class="active">โปรโมชั่น</li>
+    </ol>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3 style="margin-top:4px;">เลือกโปรโมชั่น แทงหวยลาว</h3>
+        </div>
+    </div>
+    <hr style="margin-top:5px; margin-bottom:20px;">
+
+    <div class="row">
+        <div class="text-center" ng-if="Promotions.length == 0">
+            ไม่มีข้อมูล
+        </div>
+        <div class="col-md-4" ng-repeat="promotion in Promotions">
+            <div class="panel" ng-class="promotion.promotion_status=='on' ? 'panel-success' : 'panel-danger'">
+                <div class="panel-heading">
+                    <i class="fa fa-star-o" aria-hidden="true"></i> โปรโมชั่น - {{ promotion.promotion_name }} <strong ng-if="promotion.promotion_status=='off'">(ยกเลิก)</strong>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>เลข</th>
+                                <th>ส่วนลด</th>
+                                <th>จ่าย</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>3 ตัวบน</td>
+                                <td>{{ promotion.promotion_info.three_number_top.discount }} %</td>
+                                <td>{{ promotion.promotion_info.three_number_top.pay }}</td>
+                            </tr>
+                            <tr>
+                                <td>3 ตัวบนโต๊ด</td>
+                                <td>{{ promotion.promotion_info.three_number_tode.discount }} %</td>
+                                <td>{{ promotion.promotion_info.three_number_tode.pay }}</td>
+                            </tr>
+                            <tr>
+                                <td>2 ตัวบน</td>
+                                <td>{{ promotion.promotion_info.two_number_top.discount }} %</td>
+                                <td>{{ promotion.promotion_info.two_number_top.pay }}</td>
+                            </tr>
+                            <tr>
+                                <td>2 ตัวบนโต๊ด</td>
+                                <td>{{ promotion.promotion_info.two_number_tode.discount }} %</td>
+                                <td>{{ promotion.promotion_info.two_number_tode.pay }}</td>
+                            </tr>
+                            <tr>
+                                <td>2 ตัวล่าง</td>
+                                <td>{{ promotion.promotion_info.two_number_bottom.discount }} %</td>
+                                <td>{{ promotion.promotion_info.two_number_bottom.pay }}</td>
+                            </tr>
+                            <tr>
+                                <td>วิ่งบน</td>
+                                <td>{{ promotion.promotion_info.run_top.discount }} %</td>
+                                <td>{{ promotion.promotion_info.run_top.pay }}</td>
+                            </tr>
+                            <tr>
+                                <td>วิ่งล่าง</td>
+                                <td>{{ promotion.promotion_info.run_bottom.discount }} %</td>
+                                <td>{{ promotion.promotion_info.run_bottom.pay }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div ng-if="promotion.promotion_note">
+                        <strong>หมายเหตุ</strong><br />{{ promotion.promotion_note || '-' }}
+                        <hr style="margin-top:5px; margin-bottom:20px;">
+                    </div>
+
+                    <div class="text-center">
+                        <a ui-sref="lottery.lao.ticket({lottery_id:LotteryID, promotion_id: promotion.promotion_id})" class="btn btn-success btn-block btn-lg"><i class="fa fa fa-pencil" aria-hidden="true"></i> แทงหวย</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

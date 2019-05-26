@@ -1,0 +1,160 @@
+<style>
+.table thead tr th:nth-child(6) {
+    text-align: right;
+}
+
+.table tbody tr td:nth-child(6) {
+    text-align: right;
+}
+
+.table tbody tr td:nth-child(3), .table tbody tr td:nth-child(4), .table tbody tr td:nth-child(5) {
+    color: blue;
+}
+
+.table-result tbody tr td:nth-child(2) {
+	color: blue;
+}
+</style>
+<div class="container-fluid">
+
+    <ol class="breadcrumb">
+        <li><a ui-sref="dashboard">หน้าหลัก</a></li>
+        <li class="active">ผลรางวัล</li>
+    </ol>
+
+    <div class="panel panel-default">
+	    <div class="panel-heading">
+	        <i class="fa fa-trophy" aria-hidden="true"></i> ผลการออกรางวัล
+        </div>
+        
+ 
+        <table  class="table table-hover">
+            <thead class="thin-border-bottom">
+                <tr class="bg-black">
+                    <th  class="ac">ชนิดหวย</th>
+                    <th  class="ac">ชื่องวด</th>
+               
+                    <th class="ac">3 ตัวบน</th>
+                    <th class="ac">2 ตัวบน</th>
+                    <th class="ac">2 ตัวล่าง</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                    <tr>
+                            <td colspan="99" class="bolder bg-blue2"><u>หวย ปปปป.</u></td>
+                        </tr>
+                        <tr>
+                            <td class="bolder"></td>
+                            <td class="bolder">งวดวันที่ 25-05-2019</td>
+                            <td class="blue bolder ac">45</td>
+                            <td class="blue bolder ac">569</td>
+                            <td class="blue bolder ac">69</td>
+                        </tr>
+                        <tr>
+                                <td colspan="99" class="bolder bg-blue2"><u>หวย กกกกก.</u></td>
+                            </tr>
+                            <tr>
+                                <td class="bolder"></td>
+                                <td class="bolder">งวดวันที่ 25-05-2019</td>
+                                <td class="blue bolder ac">45</td>
+                                <td class="blue bolder ac">569</td>
+                                <td class="blue bolder ac">69</td>
+                            </tr>
+                <tr>
+                    <td colspan="99" class="bolder bg-blue2"><u>หวย ธกส.</u></td>
+                </tr>
+                <tr>
+                    <td class="bolder"></td>
+                    <td class="bolder">งวดวันที่ 25-05-2019</td>
+                    <td class="blue bolder ac">45</td>
+                    <td class="blue bolder ac">569</td>
+                    <td class="blue bolder ac">69</td>
+                </tr>
+                    <tr>
+                    <td class="bolder">หวย ธกส. (BAAC2)</td>
+                    <td class="bolder"></td>
+                                    <td class="blue bolder ac">–</td>
+                    <td class="blue bolder ac">–</td>
+                    <td class="blue bolder ac">–</td>
+                                </tr>
+                        <tr>
+                    <td colspan="99" class="bolder bg-blue2">หวยหุ้นไทย</td>
+                </tr>
+            </tbody>
+            
+        </table>
+
+        <hr/>
+	    <div class="panel-body">
+			<form class="form-inline">
+				<div class="form-group">
+                    <label>ดูผลหวย</label>
+				    <select class="form-control" ng-change="lotteryFilter()" ng-model="filter">
+                        <option ng-repeat="lotto_type in LottoTypes" value="{{lotto_type.category}}">
+                            {{lotto_type.name}}
+                        </option>
+				    </select>
+				</div>
+			</form>
+            <hr>
+            
+	    	<table datatable dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" class="table table-hover">
+            </table>
+	    </div>
+	</div>
+
+</div>
+
+<script type="text/ng-template" id="other-result.html">
+	<div class="modal-header">
+	    <i class="fa fa-times pull-right" style="cursor: pointer;" ng-click="closeModal()"></i>
+	    <h4 class="modal-title" id="modal-title"><i class="fa fa-trophy" aria-hidden="true"></i> {{ModalTitle}}</h4>
+	</div>
+    <div class="modal-body" id="modal-body">
+        <table class="table table-result">
+        	<thead>
+        		<tr>
+        			<th>ประเภท</th>
+        			<th>ผลหมายเลข</th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        		<tr ng-if="Lottery.type=='lao-lottery'">
+        			<td>ผลหวยลาว</td>
+        			<td><strong>{{ Lottery.results.lao }}</strong></td>
+        		</tr>
+                <tr>
+                    <td>3 ตัวบน</td>
+                    <td><strong>{{ Lottery.results.three_number_top }}</strong></td>
+                </tr>
+                <tr>
+                    <td>3 ตัวโต๊ด</td>
+                    <td><strong>{{ three_number_tode() }}</strong></td>
+                </tr>
+                <tr>
+                    <td>2 ตัวบน</td>
+                    <td><strong>{{ Lottery.results.two_number_top }}</strong></td>
+                </tr>
+                <tr>
+                    <td>2 ตัวล่าง</td>
+                    <td><strong>{{ Lottery.results.two_number_bottom }}</strong></td>
+                </tr>
+                <tr>
+                    <td>2 ตัวโต๊ด</td>
+                    <td><strong>{{ two_number_tode() }}</strong></td>
+                </tr>
+
+                <tr>
+                    <td>วิ่งบน</td>
+                    <td><strong>{{ run_top() }}</strong></td>
+                </tr>
+
+                <tr>
+                    <td>วิ่งล่าง</td>
+                    <td><strong>{{ run_bottom() }}</strong></td>
+                </tr>
+        	</tbody>
+        </table>
+    </div>
+</script>

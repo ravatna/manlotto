@@ -1,0 +1,24 @@
+/*.table-responsive {
+    padding-bottom: 100px;
+}*/
+
+.animate-show-hide.ng-hide {
+    opacity: 0;
+}
+
+.animate-show-hide.ng-hide-add {
+    transition: all linear 0.1s;
+}
+
+.animate-show-hide.ng-hide-remove {
+    transition: all linear 0.5s;
+}
+
+.label {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+.table-noborder>tbody>tr>td {
+	border-top: 0px !important;
+}

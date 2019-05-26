@@ -1,0 +1,22 @@
+<div class="panel-body">
+	<table class="table table-noborder">
+		<tbody>
+  			<tr>
+  				<td class="text-right" style="width: 20%">จำนวนเงิน</td>
+  				<td style="width: 30%">
+  					<input type="text" class="form-control" name="amount" input-number autocomplete="off" ng-model="deposit.amount" placeholder="จำนวนเงินที่ต้องการเติม">
+  				</td>
+  				<td style="width: 50%"></td>
+  			</tr>
+  			<tr>
+  				<td class="text-right" style="width: 20%">รายละเอียด</td>
+  				<td style="width: 80%" colspan="2">
+  					<textarea class="form-control" ng-model="deposit.note" placeholder="รายละเอียดเพิ่มเติม"></textarea>
+  				</td>
+  			</tr>
+  		</tbody>
+	</table>
+</div>
+<div class="panel-footer text-right">
+	<button type="button" class="btn btn-success" style="display: unset;" ng-click="saveDeposit()"><i class="fa fa-plus" aria-hidden="true"></i> เติมเงิน</button>
+</div>

@@ -1,0 +1,188 @@
+<style type="text/css">
+.panel-body {
+	padding: 0px;
+}
+.table {
+	margin-bottom: 0px;
+}
+.secondary-tabs>.active>a {
+	color: #31708f !important;
+    background-color: #d9edf7 !important;
+    border-color: #bce8f1 !important;
+}
+</style>
+
+<div class="row" style="margin-top: 20px;">
+	<div class="col-lg-8">
+
+		<div class="panel panel-primary">
+		  	<div class="panel-heading">ข้อมูลสมาชิก</div>
+		  	<div class="panel-body">
+		  		<table class="table table-noborder">
+		  			<tbody>
+			  			<tr>
+			  				<td class="text-right" style="width: 15%">ระดับสมาชิก</td>
+			  				<td style="width: 35%">
+			  					<select class="form-control" name="role" ng-model="user.role" ng-disabled="true" ng-change="MemberShare()">
+			  						<option ng-repeat="role in Roles" value="{{ role.key }}" ng-if="role.key != 'Admin'">{{ role.text }}</option>
+			  					</select>
+			  				</td>
+			  				<td class="text-right" style="width: 15%">เครดิต</td>
+			  				<td style="width: 35%">
+			  					<input type="text" class="form-control" ng-disabled="true"  name="credit" ng-model="user.credit" input-number>
+			  				</td>
+						  </tr>
+						  <tr>
+								<td class="text-right">อักษรย่อ</td>
+								<td>
+									<input type="text" name="abb" ng-disabled="true"  maxlength="3" title="รหัสสายงาน ไม่เกิน 3 ตัว" class="form-control" ng-model="user.abb">
+								</td>
+								<td class="text-right"></td>
+								<td>
+									
+								</td>
+							</tr>
+			  			<tr>
+			  				<td class="text-right">ชื่อผู้ใช้</td>
+			  				<td>
+			  					<input type="text" name="username"  ng-disabled="true" class="form-control" ng-model="user.username">
+			  				</td>
+			  				<td class="text-right">รหัสผ่าน</td>
+			  				<td>
+			  					<input type="password" name="password" class="form-control" ng-model="user.password">
+			  				</td>
+						  </tr>
+						  
+
+			  			<tr>
+			  				<td class="text-right">ชื่อ-สกุล</td>
+			  				<td>
+			  					<input type="text" name="fullname" class="form-control" ng-model="user.fullname">
+			  				</td>
+			  				<td class="text-right" style="width: 15%">สถานะ</td>
+			  				<td style="width: 35%">
+			  					<select class="form-control" name="status" ng-model="user.status">
+			  						<option ng-repeat="status in UserStatus" value="{{ status.key }}">{{ status.text }}</option>
+			  					</select>
+			  				</td>
+			  			</tr>
+			  			<tr>
+			  				<td class="text-right">เบอร์โทร</td>
+			  				<td>
+			  					<input type="text" name="tel" class="form-control" ng-model="user.tel">
+			  				</td>
+			  				<td class="text-right">Line ID</td>
+			  				<td>
+			  					<input type="text" name="line" class="form-control" ng-model="user.line">
+			  				</td>
+			  			</tr>
+			  		</tbody>
+		  		</table>
+		  	</div>
+		</div>
+
+		<div class="panel panel-primary">
+		  	<div class="panel-heading">แบ่งหุ้น</div>
+		  	<div class="panel-body">
+		  		<table class="table table-noborder">
+		  			<tbody>
+			  			<tr>
+			  				<td style="width: 15%" class="text-right">ได้รับ:</td>
+			  				<td style="width: 20%">100%</td>
+			  				<td style="width: 15%" class="text-right">แบ่งหุ้น:</td>
+			  				<td style="width: 50%">
+			  					<select class="form-control" style="width: 150px;" ng-model="user.share" ng-disabled="user.role=='Member'">
+			  						<option ng-repeat="share in share_level" value="{{ share }}">{{ share | number:1 }}%</option>
+			  					</select>
+			  				</td>
+			  			</tr>
+			  		</tbody>
+		  		</table>
+		  	</div>
+		</div>
+
+		<!--<div class="panel panel-primary">
+			<div class="panel-heading">ข้อมูลการแทง</div>
+			<div class="panel-body">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th class="text-center">ประเภท</th>
+							<th class="text-center">ขั้นต่ำ</th>
+							<th class="text-center">สูงสุด</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="(option, setting) in user.bet_setting">
+							<td class="text-center">{{ option | lotteryOptionName }}</td>
+							<td class="text-center">
+								<input type="text" class="form-control" style="width: 150px; display: unset;" input-number ng-model="setting.min">
+							</td>
+							<td class="text-center">
+								<input type="text" class="form-control" style="width: 150px; display: unset;" input-number ng-model="setting.max">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>-->
+
+		<div class="panel panel-primary">
+			<div class="panel-heading">เปิด/ปิดหวย อัตราจ่าย และคอมมิชชั่น</div>
+			<div class="panel-body">
+
+				<ul class="nav nav-tabs secondary-tabs">
+					<li ng-class="{'active':isActiveTab=='on-off'}"><a style="border-radius: 0px; border-bottom: 2px solid;" ng-click="toggleTab('on-off')">เปิด/ปิดหวย</a></li>
+					<li ng-repeat="(key, value) in LotterySettings" ng-if="user.bet_opens[key].is_open" ng-class="{'active':isActiveTab==key}"><a style="border-radius: 0px; border-bottom: 2px solid;" ng-click="toggleTab(key)">{{ key | lotteryGroup }}</a></li>
+				</ul>
+				<div class="tab-content" style="padding: 0px; margin-bottom: 0px;">
+					
+					<table class="table" ng-if="isActiveTab=='on-off'">
+						<thead>
+							<tr>
+								<th class="text-left">หวย</th>
+								<th style="width: 20%" class="text-center">เปิด/ปิด</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="(key, value) in LotterySettings">
+								<td class="text-left">{{ key | lotteryGroup }}</td>
+								<td class="text-center">
+									<input type="checkbox" style="width: 20px; height: 20px;" ng-model="user.bet_opens[key].is_open" />
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<table class="table" ng-if="isActiveTab!='on-off'">
+						<thead>
+							<tr>
+								<th>ประเภท</th>
+								<th style="width: 20%">อัตราจ่าย</th>
+								<th style="width: 20%">คอมมิชชั่น</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="(key, option) in user.bet_opens[isActiveTab].option">
+								<td>{{ key | lotteryOptionName }}</td>
+								<td>
+									<input type="text" class="form-control" input-number style="max-width: 150px;" ng-model="option.pay">
+								</td>
+								<td>
+									<input type="text" class="form-control" input-number style="max-width: 150px;" ng-model="option.discount">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+
+			</div>
+		</div>
+
+		<div class="text-center">
+			<button type="button" class="btn btn-success btn-lg" ng-click="updateUser()">แก้ไข</button>
+		</div>
+
+	</div>
+</div>

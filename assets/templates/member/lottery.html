@@ -1,0 +1,53 @@
+<div ui-view class="container-fluid box-lottery">
+
+    <ol class="breadcrumb">
+        <li><a ui-sref="dashboard">หน้าหลัก</a></li>
+        <li class="active">แทงหวย</li>
+    </ol>
+
+    <div class="row">
+
+        <div ng-repeat="lottery in Lotteries" class="col-md-4 col-sm-6">
+            <a ui-sref="lottery.betting({group:lottery.group, lottery_id:lottery.data.lottery_id})">
+                <div class="well well-sm text-center" ng-class="lottery.data.status.user_status=='open' ? 'box-lottery-open' : 'box-lottery-close'">
+                    <h3 style="font-size:18px; font-weight: 600; margin:5px 0px;">{{ lottery.group | lotteryGroup }}</h3>
+                    <hr style="margin:15px 0px;">
+                    <div ng-if="lottery.data != null">
+                        <p>งวด {{ lottery.data.name }}</p>
+                        <p>ปิดรับ : {{ lottery.data.close_date }}</p>
+                        <p>
+                            <h2><span count-down="{{lottery.data.close_date_format}}|{{lottery.sv_time}}">กำลังตรวจสอบข้อมูล...</span></h2>
+                        </p>
+                    </div>
+                    <div ng-if="lottery.data == null">
+                        <p>
+                            <h2>ยังไม่เปิดรับแทง</h2>
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <!--<div class="col-md-4 col-sm-6">
+            <a ui-sref="lottery.lao({lottery_id:Lotteries.lao.lottery_id})">
+                <div class="well well-sm text-center" ng-class="Lotteries.lao.status.user_status=='open' ? 'box-lottery-open' : 'box-lottery-close'">
+                    <h3 style="font-size:18px; font-weight: 600; margin:5px 0px;">หวยลาว</h3>
+                    <hr style="margin:15px 0px;">
+                    <div ng-if="Lotteries.lao!=null">
+                        <p>งวดวันที่ {{ Lotteries.lao.name }}</p>
+                        <p>ปิดรับ : {{ Lotteries.lao.close_date }}</p>
+                        <p>
+                            <h2>{{ LaoLotteryCountdown }}</h2>
+                        </p>
+                    </div>
+                    <div ng-if="Lotteries.lao==null">
+                        <p>
+                            <h2>ปิดรับแทง</h2>
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>-->
+
+    </div>
+</div>

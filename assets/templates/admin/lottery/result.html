@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-6" style="margin-top: 15px;">
+        <form name="resultForm" class="form-horizontal">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center">ประเภท</th>
+                        <th>ผลรางวัล</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="(option_key, options) in Results">
+                        <td class="text-center">{{ option_key | lotteryOptionName }}</td>
+                        <td> 
+                            <input ng-repeat="value in options track by $index" type="text" class="form-control" style="max-width: 300px; margin-bottom: 2px; margin-top: 2px;" ng-model="Results[option_key][$index]" ng-blur="genResult(option_key)" maxlength="3" input-number ng-required="true">
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot ng-if="Lottery.status.user_status=='close'">
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button type="button" class="btn btn-success" ng-click="saveResult()"><i class="fa fa-floppy-o" aria-hidden="true"></i> บันทึกผล</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div ui-view>
+    <ol class="breadcrumb">
+        <li><a ui-sref="lottery">จัดการหวย</a></li>
+        <li class="active">หวยเวียดนาม ฮานอย</li>
+    </ol>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3 style="margin-top:4px;">หวยเวียดนาม ฮานอย</h3>
+        </div>
+        <div class="col-md-6 text-right">
+            <a ui-sref="lottery.hanoi.promotion" class="btn btn-info"><i class="fa fa-star" aria-hidden="true"></i> โปรโมชั่น</a>
+            <a ui-sref="lottery.hanoi.open" class="btn btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i> เปิดหวย</a>
+        </div>
+    </div>
+    <hr style="margin-top:5px; margin-bottom:5px;">
+    <table datatable dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" class="table table-hover table-striped user-table"></table>
+</div>

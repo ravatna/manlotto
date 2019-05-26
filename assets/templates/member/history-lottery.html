@@ -1,0 +1,11 @@
+<ol class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a ui-sref="report">รายงานการเดิมพัน</a></li>
+    <li><a ui-sref="report.history">ผล ได้-เสีย</a></li>
+    <li class="active">{{ Lottery.type | lotteryGroup }} งวดวันที่ {{ Lottery.lottery_date | lotteryDate }}</li>
+</ol>
+<ul class="nav nav-tabs sub-nav">
+	<li ui-sref-active="active"><a ui-sref="report.history.lottery.by_member" style="border-radius: 0px;"><i class="fa fa-users" aria-hidden="true"></i> แยกตามสมาชิก</a></li>
+	<li ui-sref-active="active"><a ui-sref="report.history.lottery.by_type" style="border-radius: 0px;"><i class="fa fa-file-text-o" aria-hidden="true"></i> แยกตามประเภท</a></li>
+	<li ui-sref-active="active"><a ui-sref="report.history.lottery.win_ticket" style="border-radius: 0px;"><i class="fa fa-trophy" aria-hidden="true"></i> โพยถูกรางวัล</a></li>
+</ul>
+<ui-view>xxx</ui-view>

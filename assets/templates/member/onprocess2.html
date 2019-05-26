@@ -1,0 +1,57 @@
+<style type="text/css">
+.table>thead>tr>th {
+	vertical-align: middle;
+	text-align: center;
+}
+</style>
+
+<style type="text/css">
+.sub-nav>.active>a {
+	color: #31708f !important;
+    background-color: #d9edf7 !important;
+    border-color: #d9edf7 !important;
+}
+</style>
+
+<div class="container-fluid">
+	<ol class="breadcrumb" style="margin-bottom: 0px;">
+	    <li class="active">รายงานการเดิมพัน</li>
+	</ol>
+	<ul class="nav nav-tabs sub-nav">
+		<li ui-sref-active="active"><a ui-sref="report.onprocess2" style="border-radius: 0px;"><i class="fa fa-clock-o" aria-hidden="true"></i> รอผลเดิมพัน</a></li>		
+	</ul>
+
+	<div class="table-responsive">
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th rowspan="2">ชนิดหวย<br>
+						<select class="form-control" ng-model="filter.group" ng-change="calTotal()">
+							<option value="">ทั้งหมด</option>
+							<option ng-repeat="open in Opens" value="{{ open }}">{{ open | lotteryGroup }}</option>
+						</select>
+					</th>
+					
+					<th >งวดวันที่</th>			
+					<th>ยอดแทง</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="lottery in Lotteries" ng-if="lottery.lottery_type==filter.group || filter.group==''">
+					<td><a ui-sref="report.detail({lottery_id:lottery.lottery_id})">{{ lottery.lottery_type | lotteryGroup }}</a></td>
+					<td class="text-center">{{ lottery.lottery_date | lotteryDate }}</td>
+					<td class="text-right" number-color="{{lottery.report.member.bet}}">{{ lottery.report.member.bet | number:2 }}</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="2" class="text-center">รวม</th>
+					<th class="text-right" number-color="{{total.member_bet}}">{{ total.member_bet | number:2 }}</th>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	
+</div>
+

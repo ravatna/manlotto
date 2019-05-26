@@ -1,0 +1,58 @@
+[19-Apr-2019 08:53:05 UTC] PHP Warning:  simplexml_load_file(): https:// wrapper is disabled in the server configuration by allow_url_fopen=0 in /home/lotto24hr/public_html/app/lottofeed.php on line 56
+[19-Apr-2019 08:53:05 UTC] PHP Warning:  simplexml_load_file(https://www.lottery.co.th/lotto/feed): failed to open stream: no suitable wrapper could be found in /home/lotto24hr/public_html/app/lottofeed.php on line 56
+[19-Apr-2019 08:53:05 UTC] PHP Warning:  simplexml_load_file(): I/O warning : failed to load external entity &quot;https://www.lottery.co.th/lotto/feed&quot; in /home/lotto24hr/public_html/app/lottofeed.php on line 56
+[19-Apr-2019 08:53:05 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/lotto24hr/public_html/app/lottofeed.php on line 59
+[19-Apr-2019 09:01:02 UTC] PHP Warning:  simplexml_load_file(): https:// wrapper is disabled in the server configuration by allow_url_fopen=0 in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:01:02 UTC] PHP Warning:  simplexml_load_file(https://www.lottery.co.th/lotto/feed): failed to open stream: no suitable wrapper could be found in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:01:02 UTC] PHP Warning:  simplexml_load_file(): I/O warning : failed to load external entity &quot;https://www.lottery.co.th/lotto/feed&quot; in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:01:02 UTC] PHP Notice:  Trying to get property of non-object in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:01:02 UTC] PHP Notice:  Trying to get property of non-object in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:01:02 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:01:27 UTC] PHP Warning:  simplexml_load_file(): https:// wrapper is disabled in the server configuration by allow_url_fopen=0 in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:01:27 UTC] PHP Warning:  simplexml_load_file(https://www.lottery.co.th/lotto/feed): failed to open stream: no suitable wrapper could be found in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:01:27 UTC] PHP Warning:  simplexml_load_file(): I/O warning : failed to load external entity &quot;https://www.lottery.co.th/lotto/feed&quot; in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:01:27 UTC] PHP Notice:  Trying to get property of non-object in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:01:27 UTC] PHP Notice:  Trying to get property of non-object in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:01:27 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:02:35 UTC] PHP Warning:  simplexml_load_file(): https:// wrapper is disabled in the server configuration by allow_url_fopen=0 in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:02:35 UTC] PHP Warning:  simplexml_load_file(https://www.lottery.co.th/lotto/feed): failed to open stream: no suitable wrapper could be found in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:02:35 UTC] PHP Warning:  simplexml_load_file(): I/O warning : failed to load external entity &quot;https://www.lottery.co.th/lotto/feed&quot; in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:02:35 UTC] PHP Notice:  Trying to get property of non-object in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:02:35 UTC] PHP Notice:  Trying to get property of non-object in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:02:35 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:04:32 UTC] PHP Warning:  simplexml_load_file(): https:// wrapper is disabled in the server configuration by allow_url_fopen=0 in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:04:32 UTC] PHP Warning:  simplexml_load_file(): https:// wrapper is disabled in the server configuration by allow_url_fopen=0 in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:04:32 UTC] PHP Warning:  simplexml_load_file(https://www.lottery.co.th/lotto/feed): failed to open stream: no suitable wrapper could be found in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:04:32 UTC] PHP Warning:  simplexml_load_file(https://www.lottery.co.th/lotto/feed): failed to open stream: no suitable wrapper could be found in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:04:32 UTC] PHP Warning:  simplexml_load_file(): I/O warning : failed to load external entity &quot;https://www.lottery.co.th/lotto/feed&quot; in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:04:32 UTC] PHP Notice:  Trying to get property of non-object in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:04:32 UTC] PHP Notice:  Trying to get property of non-object in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:04:32 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:04:32 UTC] PHP Warning:  simplexml_load_file(): I/O warning : failed to load external entity &quot;https://www.lottery.co.th/lotto/feed&quot; in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:04:32 UTC] PHP Notice:  Trying to get property of non-object in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:04:32 UTC] PHP Notice:  Trying to get property of non-object in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:04:32 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:05:23 UTC] PHP Warning:  simplexml_load_file(): https:// wrapper is disabled in the server configuration by allow_url_fopen=0 in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:05:23 UTC] PHP Warning:  simplexml_load_file(https://www.lottery.co.th/lotto/feed): failed to open stream: no suitable wrapper could be found in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:05:23 UTC] PHP Warning:  simplexml_load_file(): I/O warning : failed to load external entity &quot;https://www.lottery.co.th/lotto/feed&quot; in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:05:23 UTC] PHP Notice:  Trying to get property of non-object in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:05:23 UTC] PHP Notice:  Trying to get property of non-object in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:05:23 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:06:07 UTC] PHP Warning:  simplexml_load_file(): https:// wrapper is disabled in the server configuration by allow_url_fopen=0 in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:06:07 UTC] PHP Warning:  simplexml_load_file(https://www.lottery.co.th/lotto/feed): failed to open stream: no suitable wrapper could be found in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:06:07 UTC] PHP Warning:  simplexml_load_file(): I/O warning : failed to load external entity &quot;https://www.lottery.co.th/lotto/feed&quot; in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:06:07 UTC] PHP Notice:  Trying to get property of non-object in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:06:07 UTC] PHP Notice:  Trying to get property of non-object in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:06:07 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:07:23 UTC] PHP Warning:  simplexml_load_file(): https:// wrapper is disabled in the server configuration by allow_url_fopen=0 in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:07:23 UTC] PHP Warning:  simplexml_load_file(https://www.lottery.co.th/lotto/feed): failed to open stream: no suitable wrapper could be found in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:07:23 UTC] PHP Warning:  simplexml_load_file(): I/O warning : failed to load external entity &quot;https://www.lottery.co.th/lotto/feed&quot; in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:07:23 UTC] PHP Notice:  Trying to get property of non-object in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:07:23 UTC] PHP Notice:  Trying to get property of non-object in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:07:23 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:10:00 UTC] PHP Warning:  simplexml_load_file(): https:// wrapper is disabled in the server configuration by allow_url_fopen=0 in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:10:00 UTC] PHP Warning:  simplexml_load_file(https://www.lottery.co.th/lotto/feed): failed to open stream: no suitable wrapper could be found in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:10:00 UTC] PHP Warning:  simplexml_load_file(): I/O warning : failed to load external entity &quot;https://www.lottery.co.th/lotto/feed&quot; in /home/lotto24hr/public_html/app/lottofeed.php on line 57
+[19-Apr-2019 09:10:00 UTC] PHP Notice:  Trying to get property of non-object in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:10:00 UTC] PHP Notice:  Trying to get property of non-object in /home/lotto24hr/public_html/app/lottofeed.php on line 60
+[19-Apr-2019 09:10:00 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/lotto24hr/public_html/app/lottofeed.php on line 60
