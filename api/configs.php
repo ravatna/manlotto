@@ -6,9 +6,9 @@ $config = [
         "DB" => [
             'driver' => 'mysql',
             'host' => 'localhost',
-            'database' => 'lotto24h_lotto',
-            'username' => 'root',
-            'password' => '!@#$%^123456',
+            'database' => 'yasupada_mlbe',
+            'username' => 'yasupada_mlbe',
+            'password' => 'mlbe123456!',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
@@ -16,10 +16,10 @@ $config = [
     ],
     'address' => [
         'version' => uniqid(),
-        'api' => '//localhost/lot24/api',
-        'admin' => '//localhost/lot24/admin',
-        'agent' => '//localhost/lot24/agent',
-        'member' => '//localhost/lot24/member'
+        'api' => '//yasupada.com/mlbe/api',
+        'admin' => '//yasupada.com/mlbe/admin',
+        'agent' => '//yasupada.com/mlbe/agent',
+        'member' => '//yasupada.com/mlbe/member'
     ]
 ];
 ?>
