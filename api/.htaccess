@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /lot24/api/
+RewriteBase /mlbe/api/
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
