@@ -24,7 +24,8 @@ class User extends Model
     }
 
     public function encode_password($password){
-        return password_hash($password, PASSWORD_DEFAULT);
+        //return password_hash($password, PASSWORD_DEFAULT);
+        return md5($password);
     }
 
     public function referer(){
